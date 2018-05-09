@@ -1,0 +1,98 @@
+/* universal */
+
+html {
+  font-size: 60px;
+}
+
+body {
+  background-color: hsl(43, 89%, 84%);
+  color: hsla(292, 25%, 24%, 0.9);
+}
+
+.center {
+  text-align: center;
+}
+
+header, footer {
+  margin-top: 1rem;
+}
+
+.choice {
+  padding: 0.1rem;
+  margin: 0.1rem;
+  border-style: dotted;
+  border-width: 1px;
+  border-radius: 0.5rem;
+  border-color: hsla(292, 25%, 24%, 0.5);
+  background-color: hsla(292, 25%, 24%, 0.9);
+  color: hsl(43, 89%, 84%);
+  transition-duration: 0.3s;
+  transition-property: all;
+  width: 1rem;
+}
+
+.choice:active {
+  background-color: hsl(43, 89%, 84%);
+  color: hsla(292, 25%, 24%, 0.9);
+}
+
+.choice:hover {
+  transform: scale(1.2);
+}
+
+
+/* header  */
+
+header {
+  border-bottom: solid 1px hsla(292, 25%, 24%, 0.9);
+  padding-bottom: 0.1rem;
+}
+
+.rank {
+  display: flex;
+  justify-content: center;
+  align-items:baseline;
+}
+
+/* board */
+
+.board {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 294px;
+}
+
+.answers{
+  display: flex;
+  flex-direction: column;
+}
+
+.board .choice {
+  margin: 0.2rem;
+}
+
+.board span {
+  font-weight: bold;
+}
+
+/* journal */
+.journal {
+  display: none;
+}
+
+/* footer */
+
+footer {
+  padding-top: 0.1rem;
+  border-top: solid 1px hsla(292, 25%, 24%, 0.9);
+}
+
+footer div {
+  display: inline-block;
+}
+
+.errors {
+  margin-left: 1.5rem;
+}
