@@ -19,7 +19,6 @@ header, footer {
 
 .choice {
   padding: 0.1rem;
-  margin: 0.1rem;
   border-style: dotted;
   border-width: 1px;
   border-radius: 0.5rem;
@@ -54,6 +53,10 @@ header {
   align-items:baseline;
 }
 
+#rankCount {
+  margin-left: 0.2rem;
+}
+
 /* board */
 
 .board {
@@ -69,12 +72,21 @@ header {
   flex-direction: column;
 }
 
+#answer1, #answer3 {
+  display: none;
+}
+
 .board .choice {
-  margin: 0.2rem;
+  margin: 0.2rem 0;
 }
 
 .board span {
   font-weight: bold;
+}
+
+#equal {
+  width: 1rem;
+  text-align: center;
 }
 
 /* journal */
