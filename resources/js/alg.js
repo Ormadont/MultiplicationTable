@@ -15,6 +15,7 @@ let rightAnswer = "15";
 const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
 const answer3_span = document.getElementById('answer3');
+const answers_span = [answer1_span, answer2_span, answer3_span];
 let showed = false;
 
 const equal_span = document.getElementById('equal');
@@ -25,60 +26,43 @@ const effortsCount_span = document.getElementById('effortsCount');
 let errorsCount = 0;
 const errorsCount_span = document.getElementById('errorsCount');
 
-answer1_span.addEventListener('click', function () {
-  if (!(answered())) {
-    if (checkAnswer(answer1_span.textContent)) {
-      console.log('1 right!');
-    } else {
-      console.log('false');
-      answer1_span.style.color = "red";
-    }
-    answer3_span.style.display = "none";
-    answer2_span.style.display = "none";
-  }
+answer1_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer1_span)}
 });
 
-answer2_span.addEventListener('click', function () {
-  if (!showed) {
-    showAnswers();
-  } else if (!(answered())) {
-    if (checkAnswer(answer2_span.textContent)) {
-      console.log('2 right!');
-
-    } else {
-      console.log('false');
-      answer2_span.style.color = "red";
-    }
-    answer3_span.style.display = "none";
-    answer1_span.style.display = "none";
-  }
+answer2_span.addEventListener('click',() => {
+  if (!showed) {showAnswers()}
+  else if (!(answered())) {treatAnswer(answer2_span)}
 });
 
-answer3_span.addEventListener('click', function () {
-  if (!(answered())) {
-    if (checkAnswer(answer3_span.textContent)) {
-      console.log('3 right!');
-
-    } else {
-      console.log('false');
-      answer3_span.style.color = "red";
-    }
-    answer1_span.style.display = "none";
-    answer2_span.style.display = "none";
-  }
+answer3_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer3_span)}
 });
 
-function checkAnswer(answerForCheck) {
+function treatAnswer(element) {
+  // debugger;
+  incCountEfforts();
+  if (checkAnswer(element.textContent)) {
+    styleRightAnswer(element);
+  } else {
+    incCountErrors();
+    styleBadAnswer(element);
+  }
+  hideElements(element); //скрыть прочие
+}
+
+function incCountErrors() {
+  errorsCount++;
+  errorsCount_span.innerHTML = errorsCount;
+}
+
+function incCountEfforts() {
   effortsCount++;
   effortsCount_span.innerHTML = effortsCount;
-  if (answerForCheck === rightAnswer) {
-    return true;
-  } else {
-    errorsCount++;
-    errorsCount_span.innerHTML = errorsCount;
-    equal_span.innerHTML = "&ne;";
-    return false;
-  }
+}
+
+function checkAnswer(answerForCheck) {
+  return answerForCheck === rightAnswer ? true : false;
 }
 
 function showAnswers() {
@@ -100,6 +84,32 @@ function answered() {
   else {
     return false;
   }
+}
+
+//скрывает заданный элемент
+function hideElement(element) {element.style.display = "none"};
+
+//скрывает другие элементы
+function hideElements(element) {
+  answers_span.forEach((el) => {
+    if (el !== element) {
+      hideElement(el);
+    }
+  })
+}
+
+function insAnswer(question) {
+  question_span.innerHTML(question);
+};
+
+function styleBadAnswer(element) {
+  element.style.color = "red";
+  equal_span.innerHTML = "&ne;";
+}
+
+function styleRightAnswer(element) {
+  // element.style.color = "red";
+  // equal_span.innerHTML = "&ne;";
 }
 
 function getAnswers() {

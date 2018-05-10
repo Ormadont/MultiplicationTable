@@ -25,7 +25,7 @@ header, footer {
   border-color: hsla(292, 25%, 24%, 0.5);
   background-color: hsla(292, 25%, 24%, 0.9);
   color: hsl(43, 89%, 84%);
-  transition-duration: 0.3s;
+  transition-duration: 0.4s;
   transition-property: all;
   width: 1rem;
 }
