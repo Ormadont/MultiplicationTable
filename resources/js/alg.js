@@ -6,11 +6,11 @@
 let rankCount = 0; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
 
-const questions = [];
+let questions = [];
 let question = ["3 * 5"];
 const question_span = document.getElementById('question');
 
-const answers = [15,11,23];
+let answers = [15,11,23];
 let rightAnswer = "15";
 const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
@@ -44,7 +44,8 @@ answer3_span.addEventListener('click',() => {
 // ---------------------------------------
 
 function treatAnswer(element) {
-  debugger;
+  // debugger;
+  answers = mixUp(answers); //перемешиваем ответы
   hideElements(element);
   incCountEfforts();
   if (checkAnswer(element.textContent)) {
@@ -119,7 +120,6 @@ function nextQuestion(question) {
     restoreState();
     showed = false;
   }, 2000);
-
 };
 
 function styleBadAnswer(element) {
@@ -128,18 +128,25 @@ function styleBadAnswer(element) {
 }
 
 function styleRightAnswer(element) {
-  // element.style.color = "red";
+  element.style.color = "yellow";
   // equal_span.innerHTML = "&ne;";
 }
 
-function getAnswers() {
-  return [];
+//перемешивание произвольного массива, где array - массив
+function mixUp(origArray) {
+  const mixUpArray = [];
+  const array = origArray.slice();
+  while (array.length>0) {
+    const randomIndex = Math.floor(Math.random()*array.length); //рандомный индекс первого массива
+    const rand_element = array.splice(randomIndex,1) //удалённый элемент (массив) первого массива для второго массива
+    mixUpArray.push(rand_element[0]); //добавляем элемент в новый массив
+  }
+  return mixUpArray;
 }
 
-function getRand3() {
-  return Math.floor(Math.random()*3);
-}
+function generateArray() {
 
+}
 
 // rankCount_span.addEventListener('click', function () {
 //   rankCount_span.innerHTML = rankCount;
