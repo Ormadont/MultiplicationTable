@@ -7,7 +7,7 @@ let rankCount = 0; //Номер части таблицы умножения. Н
 const rankCount_span = document.getElementById('rankCount');
 
 const questions = [];
-let question = ["0 * 0"];
+let question = ["3 * 5"];
 const question_span = document.getElementById('question');
 
 const answers = [15,11,23];
@@ -16,7 +16,7 @@ const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
 const answer3_span = document.getElementById('answer3');
 const answers_span = [answer1_span, answer2_span, answer3_span];
-let showed = false;
+let showed = false; //перечень вариантов на экране?
 
 const equal_span = document.getElementById('equal');
 
@@ -25,6 +25,8 @@ const effortsCount_span = document.getElementById('effortsCount');
 
 let errorsCount = 0;
 const errorsCount_span = document.getElementById('errorsCount');
+
+// ---------------------------
 
 answer1_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer1_span)}
@@ -39,8 +41,11 @@ answer3_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer3_span)}
 });
 
+// ---------------------------------------
+
 function treatAnswer(element) {
-  // debugger;
+  debugger;
+  hideElements(element);
   incCountEfforts();
   if (checkAnswer(element.textContent)) {
     styleRightAnswer(element);
@@ -48,7 +53,16 @@ function treatAnswer(element) {
     incCountErrors();
     styleBadAnswer(element);
   }
-  hideElements(element); //скрыть прочие
+  nextQuestion(question);
+}
+
+function restoreState() {
+  hideElements(answer2_span); //скрыть прочие
+  equal_span.innerHTML = "=";
+  answer2_span.innerHTML = "?";
+  answer1_span.style.color = "hsl(43, 89%, 84%)";
+  answer2_span.style.color = "hsl(43, 89%, 84%)";
+  answer3_span.style.color = "hsl(43, 89%, 84%)";
 }
 
 function incCountErrors() {
@@ -95,11 +109,17 @@ function hideElements(element) {
     if (el !== element) {
       hideElement(el);
     }
-  })
+  });
+  element.style.display = "inline-block";
 }
 
-function insAnswer(question) {
-  question_span.innerHTML(question);
+function nextQuestion(question) {
+  setTimeout( () =>{
+    question_span.innerHTML = question;
+    restoreState();
+    showed = false;
+  }, 2000);
+
 };
 
 function styleBadAnswer(element) {
@@ -119,8 +139,6 @@ function getAnswers() {
 function getRand3() {
   return Math.floor(Math.random()*3);
 }
-
-
 
 
 // rankCount_span.addEventListener('click', function () {
