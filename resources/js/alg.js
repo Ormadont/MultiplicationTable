@@ -3,15 +3,15 @@
 // 2.1 попыток на 3 всего 6, из них ошибок 50%; попыток на 4 всего 9, из них ошибок 33%
 // 2.2 нежелательно чтобы информация открывалась в отдельной странице: вставка в html?
 
-let rankCount = 0; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
+let rankCount = 3; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
 
 let questions = [];
-let question = ["3 * 5"];
+let question = "3 * 5";
 const question_span = document.getElementById('question');
 
 let answers = [15,11,23];
-let rightAnswer = "15";
+let rightAnswer = 15;
 const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
 const answer3_span = document.getElementById('answer3');
@@ -27,6 +27,8 @@ let errorsCount = 0;
 const errorsCount_span = document.getElementById('errorsCount');
 
 // ---------------------------
+// debugger;
+questions = generateMixUpArrayFrom0to9();
 
 answer1_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer1_span)}
@@ -44,8 +46,6 @@ answer3_span.addEventListener('click',() => {
 // ---------------------------------------
 
 function treatAnswer(element) {
-  // debugger;
-  answers = mixUp(answers); //перемешиваем ответы
   hideElements(element);
   incCountEfforts();
   if (checkAnswer(element.textContent)) {
@@ -77,7 +77,7 @@ function incCountEfforts() {
 }
 
 function checkAnswer(answerForCheck) {
-  return answerForCheck === rightAnswer ? true : false;
+  return parseInt(answerForCheck) === rightAnswer ? true : false;
 }
 
 function showAnswers() {
@@ -115,12 +115,44 @@ function hideElements(element) {
 }
 
 function nextQuestion(question) {
-  setTimeout( () =>{
-    question_span.innerHTML = question;
-    restoreState();
-    showed = false;
-  }, 2000);
+  if (questions.length > 0) {
+    setTimeout( () =>{
+      question_span.innerHTML =  generateQA();
+      restoreState();
+      showed = false;
+    }, 2000);
+    return true;
+  } else {
+    return false;
+  }
 };
+
+function generateQA() {
+  // debugger;
+  const randomIndex = Math.floor(Math.random()*questions.length); //рандомный индекс первого массива
+  const rand_element = questions.splice(randomIndex,1) //удалённый элемент (массив)
+  question = `${rankCount} * ${rand_element}`;
+  rightAnswer = rand_element * rankCount;
+  answers[0] = rightAnswer;
+  answers[1] = rightAnswer + posDiffAnswer();
+  answers[2] = rightAnswer - negDiffAnswer();
+  answers = mixUp(answers); //перемешиваем ответы
+  console.log(questions.length + " question:" + question + " answer:" + rightAnswer);
+  console.log(answers);
+  return question;
+}
+
+function posDiffAnswer() {
+  return Math.floor(Math.random()*3) + 1;
+}
+
+function negDiffAnswer() {
+  let x = 100;
+  while ((rightAnswer - x) < 0) {
+    x = Math.floor(Math.random()*4);
+  }
+  return x;
+}
 
 function styleBadAnswer(element) {
   element.style.color = "red";
@@ -144,12 +176,10 @@ function mixUp(origArray) {
   return mixUpArray;
 }
 
-function generateArray() {
-
+function generateMixUpArrayFrom0to9() {
+  const array = [];
+  for (var i = 0; i < 10; i++) {
+    array.push(i);
+  }
+  return mixUp(array);
 }
-
-// rankCount_span.addEventListener('click', function () {
-//   rankCount_span.innerHTML = rankCount;
-// });
-
-// document.getElementById("p").style.color = "blue";
