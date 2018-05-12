@@ -3,7 +3,7 @@
 // 2.1 попыток на 3 всего 6, из них ошибок 50%; попыток на 4 всего 9, из них ошибок 33%
 // 2.2 нежелательно чтобы информация открывалась в отдельной странице: вставка в html?
 
-let rankCount = 5; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
+let rankCount = 9; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
 
 let questions = [];
@@ -164,7 +164,7 @@ function generateQA() {
 }
 
 function posDiffAnswer() {
-  return Math.floor(Math.random()*4) + 1;
+  return Math.floor(Math.random()*rankCount);
 }
 
 function negDiffAnswer() {
@@ -172,8 +172,8 @@ function negDiffAnswer() {
   if (rightAnswer === 0) {
      x = -1;
   } else {
-    while (!((x > 0) && (x < Math.floor(rightAnswer/3)) || x === 1)) {
-      x = Math.floor(Math.random()*5);
+    while (!((x > 0) && (x < Math.floor(rightAnswer/2)) || x === 1)) {
+      x = Math.floor(Math.random()*rankCount);
     }
   }
   return x;
