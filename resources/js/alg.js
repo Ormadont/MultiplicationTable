@@ -30,7 +30,7 @@ const errorsCount_span = document.getElementById('errorsCount');
 // ---------------------------
 // debugger;
 
-rankCount = Math.floor(Math.random()*8) + 2
+rankCount = Math.floor(Math.random()*8) + 2;
 
 initBoard();
 
