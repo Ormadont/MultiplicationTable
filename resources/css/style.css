@@ -55,6 +55,23 @@ header {
 
 #rankCount {
   margin-left: 0.2rem;
+  /* display: none; */
+}
+
+.ranks {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  padding: 0.2rem;
+  width: 100%;
+  background-color: hsla(0, 0%, 0%, 0.85);
+  border-radius: 0.2rem;
+}
+
+.ranks span {
+  margin-bottom: 15px;
 }
 
 /* board */

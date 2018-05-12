@@ -3,8 +3,9 @@
 // 2.1 попыток на 3 всего 6, из них ошибок 50%; попыток на 4 всего 9, из них ошибок 33%
 // 2.2 нежелательно чтобы информация открывалась в отдельной странице: вставка в html?
 
-let rankCount = 3; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
+let rankCount = 6; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
+const ranks_div = document.querySelector('.ranks');
 
 let questions = [];
 let question = "3 * 5";
@@ -18,7 +19,7 @@ const answer3_span = document.getElementById('answer3');
 const answers_span = [answer1_span, answer2_span, answer3_span];
 let showed = false; //перечень вариантов на экране?
 
-const equal_span = document.getElementById('equal');
+const equal_span = document.getElementById('equal'); //знак равенства
 
 let effortsCount = 0;
 const effortsCount_span = document.getElementById('effortsCount');
@@ -28,20 +29,10 @@ const errorsCount_span = document.getElementById('errorsCount');
 
 // ---------------------------
 // debugger;
-questions = generateMixUpArrayFrom0to9();
 
-answer1_span.addEventListener('click',() => {
-  if (!(answered())) {treatAnswer(answer1_span)}
-});
+console.log("branch: changeRank");
 
-answer2_span.addEventListener('click',() => {
-  if (!showed) {showAnswers()}
-  else if (!(answered())) {treatAnswer(answer2_span)}
-});
-
-answer3_span.addEventListener('click',() => {
-  if (!(answered())) {treatAnswer(answer3_span)}
-});
+initBoard();
 
 // ---------------------------------------
 
@@ -57,7 +48,7 @@ function treatAnswer(element) {
   nextQuestion(question);
 }
 
-function restoreState() {
+function restoreStateAfterQuestion() {
   hideElements(answer2_span); //скрыть прочие
   equal_span.innerHTML = "=";
   answer2_span.innerHTML = "?";
@@ -65,6 +56,83 @@ function restoreState() {
   answer2_span.style.color = "hsl(43, 89%, 84%)";
   answer3_span.style.color = "hsl(43, 89%, 84%)";
 }
+
+function initBoard() {
+
+  questions = generateMixUpArrayFrom0to9();
+  resetErrorsAndEfforts();
+  rankCount_span.innerHTML = rankCount;
+  nextQuestion(question, true);
+}
+
+answer1_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer1_span)}
+});
+
+answer2_span.addEventListener('click',() => {
+  if (!showed) {showAnswers()}
+  else if (!(answered())) {treatAnswer(answer2_span)}
+});
+
+answer3_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer3_span)}
+});
+
+rankCount_span.addEventListener('click', () => {
+  showRanks();
+  initBoard();
+})
+
+// choose rankCount
+
+function showRanks() {
+  ranks_div.style.display = "flex";
+
+  document.getElementById('rankCount2').addEventListener('click', () => {
+    setRankCount(2);
+    hideRanks();
+  })
+  document.getElementById('rankCount3').addEventListener('click', () => {
+    setRankCount(3);
+    hideRanks();
+  })
+  document.getElementById('rankCount4').addEventListener('click', () => {
+    setRankCount(4);
+    hideRanks();
+  })
+  document.getElementById('rankCount5').addEventListener('click', () => {
+    setRankCount(5);
+    hideRanks();
+  })
+  document.getElementById('rankCount6').addEventListener('click', () => {
+    setRankCount(6);
+    hideRanks();
+  })
+  document.getElementById('rankCount7').addEventListener('click', () => {
+    setRankCount(7);
+    hideRanks();
+  })
+  document.getElementById('rankCount8').addEventListener('click', () => {
+    setRankCount(8);
+    hideRanks();
+  })
+  document.getElementById('rankCount9').addEventListener('click', () => {
+    setRankCount(9);
+    hideRanks();
+  })
+}
+
+function setRankCount(rank) {
+  rankCount_span.innerHTML = rank;
+  rankCount = rank;
+};
+
+function hideRanks() {
+  ranks_div.style.display = "none";
+  initBoard();
+}
+
+//other
 
 function incCountErrors() {
   errorsCount++;
@@ -74,6 +142,13 @@ function incCountErrors() {
 function incCountEfforts() {
   effortsCount++;
   effortsCount_span.innerHTML = effortsCount;
+}
+
+function resetErrorsAndEfforts() {
+  effortsCount = 0;
+  effortsCount_span.innerHTML = effortsCount;
+  errorsCount = 0;
+  errorsCount_span.innerHTML = errorsCount;
 }
 
 function checkAnswer(answerForCheck) {
@@ -114,16 +189,23 @@ function hideElements(element) {
   element.style.display = "inline-block";
 }
 
-function nextQuestion(question) {
-  if (questions.length > 0) {
-    setTimeout( () =>{
-      question_span.innerHTML =  generateQA();
-      restoreState();
-      showed = false;
-    }, 2000);
-    return true;
+function nextQuestion(question, firstQuestion) {
+  if (firstQuestion) {
+    question_span.innerHTML =  generateQA();
+    restoreStateAfterQuestion();
+    firstQuestion = false
+    showed = false;
   } else {
-    return false;
+    if (questions.length > 0) {
+      setTimeout( () =>{
+        question_span.innerHTML =  generateQA();
+        restoreStateAfterQuestion();
+        showed = false;
+      }, 2000);
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 
@@ -136,6 +218,10 @@ function generateQA() {
   answers[0] = rightAnswer;
   answers[1] = rightAnswer + posDiffAnswer();
   answers[2] = rightAnswer - negDiffAnswer();
+  console.log("rightAnswer:" + rightAnswer);
+  while ((answers[0] === answers[1]) && (rightAnswer !== 0)) {
+    answers[1] = rightAnswer + posDiffAnswer();
+  }
   answers = mixUp(answers); //перемешиваем ответы
   console.log(questions.length + " question:" + question + " answer:" + rightAnswer);
   console.log(answers);
@@ -143,17 +229,15 @@ function generateQA() {
 }
 
 function posDiffAnswer() {
-  return Math.floor(Math.random()*4) + 1;
+  return Math.floor(Math.random()*rightAnswer);
 }
 
 function negDiffAnswer() {
-  let x = 100;
+  let x = 0;
   if (rightAnswer === 0) {
      x = -1;
   } else {
-    while (!((x > 0) && (x < Math.floor(rightAnswer/3)) || x === 1)) {
-      x = Math.floor(Math.random()*5);
-    }
+    x = Math.floor(Math.random()*rightAnswer);
   }
   return x;
 }
