@@ -143,13 +143,17 @@ function generateQA() {
 }
 
 function posDiffAnswer() {
-  return Math.floor(Math.random()*3) + 1;
+  return Math.floor(Math.random()*4) + 1;
 }
 
 function negDiffAnswer() {
   let x = 100;
-  while ((rightAnswer - x) < 0) {
-    x = Math.floor(Math.random()*4);
+  if (rightAnswer === 0) {
+     x = -1;
+  } else {
+    while (!((x > 0) && (x < Math.floor(rightAnswer/3)) || x === 1)) {
+      x = Math.floor(Math.random()*5);
+    }
   }
   return x;
 }
