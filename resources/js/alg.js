@@ -44,6 +44,7 @@ function treatAnswer(element) {
   } else {
     incCountErrors();
     styleBadAnswer(element);
+    addParagraphOfErrors();
   }
   nextQuestion(question);
 }
@@ -52,9 +53,15 @@ function restoreStateAfterQuestion() {
   hideElements(answer2_span); //скрыть прочие
   equal_span.innerHTML = "=";
   answer2_span.innerHTML = "?";
-  answer1_span.style.color = "hsl(43, 89%, 84%)";
-  answer2_span.style.color = "hsl(43, 89%, 84%)";
-  answer3_span.style.color = "hsl(43, 89%, 84%)";
+  restorElementColors(answer1_span);
+  restorElementColors(answer2_span);
+  restorElementColors(answer3_span);
+}
+
+function restorElementColors(element) {
+  element.style.color = "hsl(43, 89%, 84%)";
+  element.style.backgroundColor = "hsla(292, 25%, 24%, 0.9)";
+  element.style.borderColor = "hsla(292, 25%, 24%, 0.9)";
 }
 
 function initBoard() {
@@ -220,7 +227,10 @@ function generateQA() {
   answers[1] = rightAnswer + posDiffAnswer();
   answers[2] = rightAnswer - negDiffAnswer();
   console.log("rightAnswer:" + rightAnswer);
-  while ((answers[0] === answers[1]) && (rightAnswer !== 0)) {
+  while (answers[1] === answers[2]) {
+    answers[1] += 1;
+  }
+  while (answers[1] >= 100) {
     answers[1] = rightAnswer + posDiffAnswer();
   }
   answers = mixUp(answers); //перемешиваем ответы
@@ -230,7 +240,7 @@ function generateQA() {
 }
 
 function posDiffAnswer() {
-  return Math.floor(Math.random()*rightAnswer);
+  return Math.floor(Math.random()*(rightAnswer/2));
 }
 
 function negDiffAnswer() {
@@ -238,7 +248,7 @@ function negDiffAnswer() {
   if (rightAnswer === 0) {
      x = -1;
   } else {
-    x = Math.floor(Math.random()*rightAnswer);
+    x = Math.floor(Math.random()*rightAnswer/2);
   }
   return x;
 }
@@ -249,7 +259,9 @@ function styleBadAnswer(element) {
 }
 
 function styleRightAnswer(element) {
-  element.style.color = "yellow";
+  element.style.color = "hsla(292, 25%, 24%, 0.9)";
+  element.style.backgroundColor = "hsl(43, 89%, 84%)";
+  element.style.borderColor = "hsl(43, 89%, 84%)";
   // equal_span.innerHTML = "&ne;";
 }
 
@@ -271,4 +283,13 @@ function generateMixUpArrayFrom0to9() {
     array.push(i);
   }
   return mixUp(array);
+}
+
+function addParagraphOfErrors() {
+  var para = document.createElement("p");
+  neededQ = `${question} = ${rightAnswer}`;
+  var node = document.createTextNode(neededQ);
+  para.appendChild(node);
+  var element = document.querySelector(".goodAnswers");
+  element.appendChild(para);
 }
