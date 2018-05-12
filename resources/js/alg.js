@@ -3,7 +3,7 @@
 // 2.1 попыток на 3 всего 6, из них ошибок 50%; попыток на 4 всего 9, из них ошибок 33%
 // 2.2 нежелательно чтобы информация открывалась в отдельной странице: вставка в html?
 
-let rankCount = 3; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
+let rankCount = 5; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
 
 let questions = [];
@@ -18,7 +18,7 @@ const answer3_span = document.getElementById('answer3');
 const answers_span = [answer1_span, answer2_span, answer3_span];
 let showed = false; //перечень вариантов на экране?
 
-const equal_span = document.getElementById('equal');
+const equal_span = document.getElementById('equal'); //знак равенства
 
 let effortsCount = 0;
 const effortsCount_span = document.getElementById('effortsCount');
@@ -28,20 +28,10 @@ const errorsCount_span = document.getElementById('errorsCount');
 
 // ---------------------------
 // debugger;
-questions = generateMixUpArrayFrom0to9();
 
-answer1_span.addEventListener('click',() => {
-  if (!(answered())) {treatAnswer(answer1_span)}
-});
+console.log("branch: changeRank");
 
-answer2_span.addEventListener('click',() => {
-  if (!showed) {showAnswers()}
-  else if (!(answered())) {treatAnswer(answer2_span)}
-});
-
-answer3_span.addEventListener('click',() => {
-  if (!(answered())) {treatAnswer(answer3_span)}
-});
+initBoard();
 
 // ---------------------------------------
 
@@ -57,13 +47,36 @@ function treatAnswer(element) {
   nextQuestion(question);
 }
 
-function restoreState() {
+function restoreStateAfterQuestion() {
   hideElements(answer2_span); //скрыть прочие
   equal_span.innerHTML = "=";
   answer2_span.innerHTML = "?";
   answer1_span.style.color = "hsl(43, 89%, 84%)";
   answer2_span.style.color = "hsl(43, 89%, 84%)";
   answer3_span.style.color = "hsl(43, 89%, 84%)";
+}
+
+function initBoard() {
+
+  questions = generateMixUpArrayFrom0to9();
+  effortsCount = 0;
+  errorsCount = 0;
+  rankCount_span.innerHTML = rankCount;
+
+  answer1_span.addEventListener('click',() => {
+    if (!(answered())) {treatAnswer(answer1_span)}
+  });
+
+  answer2_span.addEventListener('click',() => {
+    if (!showed) {showAnswers()}
+    else if (!(answered())) {treatAnswer(answer2_span)}
+  });
+
+  answer3_span.addEventListener('click',() => {
+    if (!(answered())) {treatAnswer(answer3_span)}
+  });
+
+  nextQuestion(question, true);
 }
 
 function incCountErrors() {
@@ -114,17 +127,25 @@ function hideElements(element) {
   element.style.display = "inline-block";
 }
 
-function nextQuestion(question) {
-  if (questions.length > 0) {
-    setTimeout( () =>{
-      question_span.innerHTML =  generateQA();
-      restoreState();
-      showed = false;
-    }, 2000);
-    return true;
+function nextQuestion(question, firstQuestion) {
+  if (firstQuestion) {
+    question_span.innerHTML =  generateQA();
+    restoreStateAfterQuestion();
+    firstQuestion = false
+    showed = false;
   } else {
-    return false;
+    if (questions.length > 0) {
+      setTimeout( () =>{
+        question_span.innerHTML =  generateQA();
+        restoreStateAfterQuestion();
+        showed = false;
+      }, 2000);
+      return true;
+    } else {
+      return false;
+    }
   }
+
 };
 
 function generateQA() {
