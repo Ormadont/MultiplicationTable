@@ -3,7 +3,7 @@
 // 2.1 попыток на 3 всего 6, из них ошибок 50%; попыток на 4 всего 9, из них ошибок 33%
 // 2.2 нежелательно чтобы информация открывалась в отдельной странице: вставка в html?
 
-let rankCount = 9; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
+let rankCount = 6; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
 
 let questions = [];
@@ -76,6 +76,8 @@ function initBoard() {
     if (!(answered())) {treatAnswer(answer3_span)}
   });
 
+
+
   nextQuestion(question, true);
 }
 
@@ -145,7 +147,6 @@ function nextQuestion(question, firstQuestion) {
       return false;
     }
   }
-
 };
 
 function generateQA() {
@@ -157,6 +158,10 @@ function generateQA() {
   answers[0] = rightAnswer;
   answers[1] = rightAnswer + posDiffAnswer();
   answers[2] = rightAnswer - negDiffAnswer();
+  console.log("rightAnswer:" + rightAnswer);
+  while ((answers[0] === answers[1]) && (rightAnswer !== 0)) {
+    answers[1] = rightAnswer + posDiffAnswer();
+  }
   answers = mixUp(answers); //перемешиваем ответы
   console.log(questions.length + " question:" + question + " answer:" + rightAnswer);
   console.log(answers);
@@ -164,17 +169,15 @@ function generateQA() {
 }
 
 function posDiffAnswer() {
-  return Math.floor(Math.random()*rankCount);
+  return Math.floor(Math.random()*rightAnswer);
 }
 
 function negDiffAnswer() {
-  let x = 100;
+  let x = 0;
   if (rightAnswer === 0) {
      x = -1;
   } else {
-    while (!((x > 0) && (x < Math.floor(rightAnswer/2)) || x === 1)) {
-      x = Math.floor(Math.random()*rankCount);
-    }
+    x = Math.floor(Math.random()*rightAnswer);
   }
   return x;
 }
