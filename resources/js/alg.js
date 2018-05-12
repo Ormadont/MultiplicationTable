@@ -227,15 +227,19 @@ function generateQA() {
   answers[1] = rightAnswer + posDiffAnswer();
   answers[2] = rightAnswer - negDiffAnswer();
   console.log("rightAnswer:" + rightAnswer);
-  while (answers[1] === answers[2]) {
-    answers[1] += 1;
-  }
   while (answers[1] >= 100) {
     answers[1] = rightAnswer + posDiffAnswer();
   }
-  answers = mixUp(answers); //перемешиваем ответы
+  // debugger;
+  while ((answers[0] === answers[1])
+  ||  (answers[0] === answers[2])
+  ||  (answers[1] === answers[2])) {
+    answers[1]+= Math.floor(Math.random()*2);
+    answers[2]+= Math.floor(Math.random()*2);
+  }
   console.log(questions.length + " question:" + question + " answer:" + rightAnswer);
   console.log(answers);
+  answers = mixUp(answers); //перемешиваем ответы
   return question;
 }
 
