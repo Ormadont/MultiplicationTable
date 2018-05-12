@@ -30,7 +30,7 @@ const errorsCount_span = document.getElementById('errorsCount');
 // ---------------------------
 // debugger;
 
-console.log("branch: changeRank");
+rankCount = Math.floor(Math.random()*8) + 2
 
 initBoard();
 
@@ -61,7 +61,7 @@ function initBoard() {
 
   questions = generateMixUpArrayFrom0to9();
   resetErrorsAndEfforts();
-  rankCount = Math.floor(Math.random()*8) + 2
+
   rankCount_span.innerHTML = rankCount;
   nextQuestion(question, true);
 }
