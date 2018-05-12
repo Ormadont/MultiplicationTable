@@ -60,18 +60,21 @@ header {
 
 .ranks {
   display: none;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 12rem;
   position: fixed;
   top: 0;
-  padding: 0.2rem;
+  padding: 0 10%;
   width: 100%;
   background-color: hsla(0, 0%, 0%, 0.85);
   border-radius: 0.2rem;
 }
 
 .ranks span {
-  margin-bottom: 15px;
+  margin: 0.6rem;
+  padding: 0.6rem;
 }
 
 /* board */
