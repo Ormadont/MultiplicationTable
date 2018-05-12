@@ -61,7 +61,7 @@ function initBoard() {
 
   questions = generateMixUpArrayFrom0to9();
   resetErrorsAndEfforts();
-  rankCount_span.innerHTML = rankCount;
+  rankCount_span.innerHTML = Math.floor(Math.random()*8) + 2;
   nextQuestion(question, true);
 }
 
