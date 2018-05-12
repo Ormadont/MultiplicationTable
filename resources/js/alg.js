@@ -5,6 +5,7 @@
 
 let rankCount = 6; //Номер части таблицы умножения. Например, 3 - это 3*0, 3*1, ...
 const rankCount_span = document.getElementById('rankCount');
+const ranks_div = document.querySelector('.ranks');
 
 let questions = [];
 let question = "3 * 5";
@@ -59,27 +60,79 @@ function restoreStateAfterQuestion() {
 function initBoard() {
 
   questions = generateMixUpArrayFrom0to9();
-  effortsCount = 0;
-  errorsCount = 0;
+  resetErrorsAndEfforts();
   rankCount_span.innerHTML = rankCount;
-
-  answer1_span.addEventListener('click',() => {
-    if (!(answered())) {treatAnswer(answer1_span)}
-  });
-
-  answer2_span.addEventListener('click',() => {
-    if (!showed) {showAnswers()}
-    else if (!(answered())) {treatAnswer(answer2_span)}
-  });
-
-  answer3_span.addEventListener('click',() => {
-    if (!(answered())) {treatAnswer(answer3_span)}
-  });
-
-
-
   nextQuestion(question, true);
 }
+
+answer1_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer1_span)}
+});
+
+answer2_span.addEventListener('click',() => {
+  if (!showed) {showAnswers()}
+  else if (!(answered())) {treatAnswer(answer2_span)}
+});
+
+answer3_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer3_span)}
+});
+
+rankCount_span.addEventListener('click', () => {
+  showRanks();
+  initBoard();
+})
+
+// choose rankCount
+
+function showRanks() {
+  ranks_div.style.display = "flex";
+
+  document.getElementById('rankCount2').addEventListener('click', () => {
+    setRankCount(2);
+    hideRanks();
+  })
+  document.getElementById('rankCount3').addEventListener('click', () => {
+    setRankCount(3);
+    hideRanks();
+  })
+  document.getElementById('rankCount4').addEventListener('click', () => {
+    setRankCount(4);
+    hideRanks();
+  })
+  document.getElementById('rankCount5').addEventListener('click', () => {
+    setRankCount(5);
+    hideRanks();
+  })
+  document.getElementById('rankCount6').addEventListener('click', () => {
+    setRankCount(6);
+    hideRanks();
+  })
+  document.getElementById('rankCount7').addEventListener('click', () => {
+    setRankCount(7);
+    hideRanks();
+  })
+  document.getElementById('rankCount8').addEventListener('click', () => {
+    setRankCount(8);
+    hideRanks();
+  })
+  document.getElementById('rankCount9').addEventListener('click', () => {
+    setRankCount(9);
+    hideRanks();
+  })
+}
+
+function setRankCount(rank) {
+  rankCount_span.innerHTML = rank;
+  rankCount = rank;
+};
+
+function hideRanks() {
+  ranks_div.style.display = "none";
+  initBoard();
+}
+
+//other
 
 function incCountErrors() {
   errorsCount++;
@@ -89,6 +142,13 @@ function incCountErrors() {
 function incCountEfforts() {
   effortsCount++;
   effortsCount_span.innerHTML = effortsCount;
+}
+
+function resetErrorsAndEfforts() {
+  effortsCount = 0;
+  effortsCount_span.innerHTML = effortsCount;
+  errorsCount = 0;
+  errorsCount_span.innerHTML = errorsCount;
 }
 
 function checkAnswer(answerForCheck) {
