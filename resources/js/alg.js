@@ -324,3 +324,14 @@ function addParagraphOfErrors() {
   var element = document.querySelector(".goodAnswers");
   element.appendChild(para);
 }
+
+function genMultTable() {
+  var a = new Array(10);
+  for (i = 0; i < 10; i++) {
+    a[i] = new Array(10);
+    for (j = 0; j < 10; j++) {
+      a[i][j] = i * j;
+    }
+  }
+  return a;
+}
