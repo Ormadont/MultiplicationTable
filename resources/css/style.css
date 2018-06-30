@@ -91,14 +91,17 @@ header {
 .answers{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  height: 294px;
+  justify-content: center;
 }
 
-#answer1, #answer3 {
+#answer1, #answer3, #answer4, #answer5, #answer6 {
   display: none;
 }
 
 .board .choice {
-  margin: 0.2rem 0;
+  margin: 0.2rem 0.4rem 0.2rem 0;
 }
 
 .board span {

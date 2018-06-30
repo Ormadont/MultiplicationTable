@@ -11,12 +11,15 @@ let questions = [];
 let question = "3 * 5";
 const question_span = document.getElementById('question');
 
-let answers = [15,11,23];
+let answers = [15,11,23,12,9,22];
 let rightAnswer = 15;
 const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
 const answer3_span = document.getElementById('answer3');
-const answers_span = [answer1_span, answer2_span, answer3_span];
+const answer4_span = document.getElementById('answer4');
+const answer5_span = document.getElementById('answer5');
+const answer6_span = document.getElementById('answer6');
+const answers_span = [answer1_span, answer2_span, answer3_span, answer4_span, answer5_span, answer6_span];
 let showed = false; //перечень вариантов на экране?
 
 const equal_span = document.getElementById('equal'); //знак равенства
@@ -56,6 +59,9 @@ function restoreStateAfterQuestion() {
   restorElementColors(answer1_span);
   restorElementColors(answer2_span);
   restorElementColors(answer3_span);
+  restorElementColors(answer4_span);
+  restorElementColors(answer5_span);
+  restorElementColors(answer6_span);
 }
 
 function restorElementColors(element) {
@@ -85,6 +91,19 @@ answer2_span.addEventListener('click',() => {
 answer3_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer3_span)}
 });
+
+answer4_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer4_span)}
+});
+
+answer5_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer5_span)}
+});
+
+answer6_span.addEventListener('click',() => {
+  if (!(answered())) {treatAnswer(answer6_span)}
+});
+
 
 rankCount_span.addEventListener('click', () => {
   showRanks();
@@ -166,9 +185,15 @@ function checkAnswer(answerForCheck) {
 function showAnswers() {
   answer1_span.style.display = "inline-block";
   answer3_span.style.display = "inline-block";
+  answer4_span.style.display = "inline-block";
+  answer5_span.style.display = "inline-block";
+  answer6_span.style.display = "inline-block";
   answer1_span.innerHTML = answers[0];
   answer2_span.innerHTML = answers[1];
   answer3_span.innerHTML = answers[2];
+  answer4_span.innerHTML = answers[3];
+  answer5_span.innerHTML = answers[4];
+  answer6_span.innerHTML = answers[5];
   showed = true;
 }
 
@@ -176,7 +201,9 @@ function answered() {
   if (
       answer1_span.style.display==="none"
       || answer3_span.style.display==="none"
-      || answer3_span.style.display==="none") {
+      || answer4_span.style.display==="none"
+      || answer5_span.style.display==="none"
+      || answer6_span.style.display==="none") {
     return true;
   }
   else {
