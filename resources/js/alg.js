@@ -72,8 +72,6 @@ function restorElementColors(element) {
 
 function initBoard() {
 
-
-
   questions = generateMixUpArrayFrom0to9(); //example: [2, 3, 8, 6, 0, 7, 1, 9, 4]
   resetErrorsAndEfforts();
 
@@ -309,6 +307,5 @@ function addParagraphOfErrors() {
 }
 
 function getRandomAnswer() {
-  //get random indexes
   return Math.floor(Math.random()*10)*rankCount;
 }
