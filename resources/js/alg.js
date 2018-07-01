@@ -72,7 +72,7 @@ function restorElementColors(element) {
 
 function initBoard() {
 
-  questions = generateMixUpArrayFrom0to9();
+  questions = generateMixUpArrayFrom0to9(); //example: [2, 3, 8, 6, 0, 7, 1, 9, 4]
   resetErrorsAndEfforts();
 
   rankCount_span.innerHTML = rankCount;
@@ -325,12 +325,15 @@ function addParagraphOfErrors() {
   element.appendChild(para);
 }
 
+
+//создание таблицы умножения с 1 до 9
 function genMultTable() {
-  var a = new Array(10);
-  for (i = 0; i < 10; i++) {
-    a[i] = new Array(10);
-    for (j = 0; j < 10; j++) {
-      a[i][j] = i * j;
+  const size = 9;
+  var a = new Array(size);
+  for (i = 0; i < size; i++) {
+    a[i] = new Array(size);
+    for (j = 0; j < size; j++) {
+      a[i][j] = (i+1) * (j+1);
     }
   }
   return a;
