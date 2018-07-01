@@ -9,7 +9,6 @@ const ranks_div = document.querySelector('.ranks');
 
 let questions = [];
 let question = "3 * 5";
-const multTable = genMultTable();
 const question_span = document.getElementById('question');
 
 let answers = [-1,-1,-1,-1,-1,-1];
@@ -247,31 +246,6 @@ function nextQuestion(question, firstQuestion) {
   }
 };
 
-function generateQATT() {
-  // debugger;
-  const randomIndex = Math.floor(Math.random()*questions.length); //рандомный индекс первого массива
-  const rand_element = questions.splice(randomIndex,1) //удалённый элемент (массив)
-  question = `${rankCount} * ${rand_element}`;
-  rightAnswer =  rankCount * rand_element;
-
-  answers[0] = rightAnswer;
-  answers[1] = rightAnswer + posDiffAnswer();
-  answers[2] = rightAnswer - negDiffAnswer();
-  console.log("rightAnswer:" + rightAnswer);
-  while (answers[1] >= 100) {
-    answers[1] = rightAnswer + posDiffAnswer();
-  }
-
-  while ((answers[0] === answers[1])
-  ||  (answers[0] === answers[2])
-  ||  (answers[1] === answers[2])) {
-    answers[1]+= Math.floor(Math.random()*2);
-    answers[2]+= Math.floor(Math.random()*2);
-  }
-  answers = mixUp(answers); //перемешиваем ответы
-  return question;
-}
-
 function generateQA() {
   // debugger;
   const randomIndex = Math.floor(Math.random()*questions.length); //рандомный индекс первого массива
@@ -291,20 +265,6 @@ function generateQA() {
   }
   answers = mixUp(answers); //перемешиваем ответы
   return question;
-}
-
-function posDiffAnswer() {
-  return Math.floor(Math.random()*(rightAnswer/2));
-}
-
-function negDiffAnswer() {
-  let x = 0;
-  if (rightAnswer === 0) {
-     x = -1;
-  } else {
-    x = Math.floor(Math.random()*rightAnswer/2);
-  }
-  return x;
 }
 
 function styleBadAnswer(element) {
@@ -348,23 +308,7 @@ function addParagraphOfErrors() {
   element.appendChild(para);
 }
 
-
-//создание таблицы умножения с 1 до 9
-function genMultTable() {
-  const size = 9;
-  var a = new Array(size);
-  for (i = 0; i < size; i++) {
-    a[i] = new Array(size);
-    for (j = 0; j < size; j++) {
-      a[i][j] = (i+1) * (j+1);
-    }
-  }
-  return a;
-}
-
 function getRandomAnswer() {
   //get random indexes
-  const i = Math.floor(Math.random()*9);
-  const j = Math.floor(Math.random()*9);
-  return multTable[i][j];
+  return Math.floor(Math.random()*10)*rankCount;
 }
