@@ -9,9 +9,10 @@ const ranks_div = document.querySelector('.ranks');
 
 let questions = [];
 let question = "3 * 5";
+const multTable = genMultTable();
 const question_span = document.getElementById('question');
 
-let answers = [15,11,23,12,9,22];
+let answers = [-1,-1,-1,-1,-1,-1];
 let rightAnswer = 15;
 const answer1_span = document.getElementById('answer1');
 const answer2_span = document.getElementById('answer2');
@@ -72,7 +73,9 @@ function restorElementColors(element) {
 
 function initBoard() {
 
-  questions = generateMixUpArrayFrom0to9();
+
+
+  questions = generateMixUpArrayFrom0to9(); //example: [2, 3, 8, 6, 0, 7, 1, 9, 4]
   resetErrorsAndEfforts();
 
   rankCount_span.innerHTML = rankCount;
@@ -244,12 +247,13 @@ function nextQuestion(question, firstQuestion) {
   }
 };
 
-function generateQA() {
+function generateQATT() {
   // debugger;
   const randomIndex = Math.floor(Math.random()*questions.length); //рандомный индекс первого массива
   const rand_element = questions.splice(randomIndex,1) //удалённый элемент (массив)
   question = `${rankCount} * ${rand_element}`;
-  rightAnswer = rand_element * rankCount;
+  rightAnswer =  rankCount * rand_element;
+
   answers[0] = rightAnswer;
   answers[1] = rightAnswer + posDiffAnswer();
   answers[2] = rightAnswer - negDiffAnswer();
@@ -257,15 +261,34 @@ function generateQA() {
   while (answers[1] >= 100) {
     answers[1] = rightAnswer + posDiffAnswer();
   }
-  // debugger;
+
   while ((answers[0] === answers[1])
   ||  (answers[0] === answers[2])
   ||  (answers[1] === answers[2])) {
     answers[1]+= Math.floor(Math.random()*2);
     answers[2]+= Math.floor(Math.random()*2);
   }
-  console.log(questions.length + " question:" + question + " answer:" + rightAnswer);
-  console.log(answers);
+  answers = mixUp(answers); //перемешиваем ответы
+  return question;
+}
+
+function generateQA() {
+  // debugger;
+  const randomIndex = Math.floor(Math.random()*questions.length); //рандомный индекс первого массива
+  const rand_element = questions.splice(randomIndex,1) //удалённый элемент (массив)
+  question = `${rankCount} * ${rand_element}`;
+  rightAnswer =  rankCount * rand_element;
+  answers[0] = rightAnswer;
+
+  //начинаем с 1, т.к. с индексом 0 - это правильный ответ
+  for (let i = 1; i < answers.length; i++) {
+    const RandomAnswer = getRandomAnswer();
+    if (answers.includes(RandomAnswer)) {
+      i--;
+      continue;
+    }
+    answers[i] = RandomAnswer;
+  }
   answers = mixUp(answers); //перемешиваем ответы
   return question;
 }
@@ -323,4 +346,25 @@ function addParagraphOfErrors() {
   para.appendChild(node);
   var element = document.querySelector(".goodAnswers");
   element.appendChild(para);
+}
+
+
+//создание таблицы умножения с 1 до 9
+function genMultTable() {
+  const size = 9;
+  var a = new Array(size);
+  for (i = 0; i < size; i++) {
+    a[i] = new Array(size);
+    for (j = 0; j < size; j++) {
+      a[i][j] = (i+1) * (j+1);
+    }
+  }
+  return a;
+}
+
+function getRandomAnswer() {
+  //get random indexes
+  const i = Math.floor(Math.random()*9);
+  const j = Math.floor(Math.random()*9);
+  return multTable[i][j];
 }
