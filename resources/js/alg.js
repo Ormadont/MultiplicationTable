@@ -285,16 +285,12 @@ function generateQA() {
     const RandomAnswer = getRandomAnswer();
     if (answers.includes(RandomAnswer)) {
       i--;
-      console.log(`include i=${i}`);
       continue;
     }
     answers[i] = RandomAnswer;
   }
-
-
   answers = mixUp(answers); //перемешиваем ответы
   return question;
-
 }
 
 function posDiffAnswer() {
