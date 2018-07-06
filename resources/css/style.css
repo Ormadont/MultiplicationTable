@@ -1,192 +1,195 @@
 /* universal */
 
 html {
-  font-size: 60px;
+  font-size : 60px;
 }
 
 body {
-  background-color: hsl(43, 89%, 84%);
-  color: hsla(292, 25%, 24%, 0.9);
+  color            : hsla(292, 25%, 24%, 0.9);
+  background-color : hsl(43, 89%, 84%);
 }
 
 .center {
-  text-align: center;
+  text-align : center;
 }
 
-header, footer {
-  margin-top: 0.1rem;
+footer,
+header {
+  margin-top : 0.1rem;
 }
 
 .choice {
-  padding: 0.1rem;
-  border-style: dotted;
-  border-width: 1px;
-  border-radius: 0.5rem;
-  border-color: hsla(292, 25%, 24%, 0.5);
-  background-color: hsla(292, 25%, 24%, 0.9);
-  color: hsl(43, 89%, 84%);
-  transition-duration: 0.4s;
-  transition-property: all;
-  width: 1rem;
+  width               : 1rem;
+  padding             : 0.1rem;
+  color               : hsl(43, 89%, 84%);
+  border-color        : hsla(292, 25%, 24%, 0.5);
+  border-width        : 1px;
+  border-style        : dotted;
+  border-radius       : 0.5rem;
+  background-color    : hsla(292, 25%, 24%, 0.9);
+  transition-property : all;
+  transition-duration : 0.4s;
 }
 
 .choice:active {
-  background-color: hsl(43, 89%, 84%);
-  color: hsla(292, 25%, 24%, 0.9);
+  color            : hsla(292, 25%, 24%, 0.9);
+  background-color : hsl(43, 89%, 84%);
 }
 
 .choice:hover {
-  transform: scale(1.2);
+  transform : scale(1.2);
 }
 
-
-/* header  */
+/* header */
 
 header {
-  border-bottom: solid 1px hsla(292, 25%, 24%, 0.9);
-  padding-bottom: 0.1rem;
+  padding-bottom : 0.1rem;
+  border-bottom  : solid 1px hsla(292, 25%, 24%, 0.9);
 }
 
 .rank {
-  display: flex;
-  justify-content: center;
-  align-items:baseline;
+  display         : flex;
+  align-items     : baseline;
+  justify-content : center;
 }
 
 #rankCount {
-  margin-left: 0.2rem;
+  margin-left : 0.2rem;
   /* display: none; */
 }
 
 .ranks {
-  display: none;
+  display          : none;
+  position         : fixed;
+  top              : 0;
+  width            : 100%;
+  min-height       : 5rem;
+  max-height       : 10rem;
+  border-radius    : 0.2rem;
+  background-color : hsla(0, 0%, 0%, 0.85);
+  align-items      : center;
+  flex-wrap        : wrap;
+  justify-content  : center;
   /* flex-direction: column; */
-  min-height: 5rem;
-  max-height: 10rem;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: hsla(0, 0%, 0%, 0.85);
-  border-radius: 0.2rem;
 }
 
 .ranks span {
-  margin: 0.5rem;
-  padding: 0.4rem;
+  margin  : 0.5rem;
+  padding : 0.4rem;
 }
 
 /* board */
 
 .board {
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 294px;
+  display         : flex;
+  height          : 294px;
+  margin-top      : 0.5rem;
+  align-items     : center;
+  justify-content : center;
 }
 
-.answers{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: 294px;
-  justify-content: center;
+.answers {
+  display         : flex;
+  height          : 294px;
+  flex-direction  : column;
+  flex-wrap       : wrap;
+  justify-content : center;
 }
 
-#answer1, #answer3, #answer4, #answer5, #answer6 {
-  display: none;
+#answer1,
+#answer3,
+#answer4,
+#answer5,
+#answer6 {
+  display : none;
 }
 
 .board .choice {
-  margin: 0.2rem 0.4rem 0.2rem 0;
+  margin : 0.2rem 0.4rem 0.2rem 0;
 }
 
 .board span {
-  font-weight: bold;
+  font-weight : bold;
 }
 
 #equal {
-  width: 1rem;
-  text-align: center;
+  width      : 1rem;
+  text-align : center;
 }
 
 /* footer */
 
 footer {
-  padding-top: 0.1rem;
-  border-top: solid 1px hsla(292, 25%, 24%, 0.9);
+  padding-top : 0.1rem;
+  border-top  : solid 1px hsla(292, 25%, 24%, 0.9);
 }
 
 footer div {
-  display: inline-block;
+  display : inline-block;
 }
 
 .efforts {
-  margin-right: 0.5rem;
+  margin-right : 0.5rem;
 }
 
 .multTable {
-  left: 0;
-  top:0;
-  z-index: 1;
-  position: absolute;
-
-  width: 100%;
-
-  background-color: hsla(0, 0%, 0%, 0.85);
-  color: hsl(43, 89%, 84%);
-  border-radius: 0.2rem;
-
-  display: grid;
+  z-index          : 1;
+  display          : grid;
+  position         : absolute;
+  top              : 0;
+  left             : 0;
+  width            : 100%;
+  color            : hsl(43, 89%, 84%);
+  border-radius    : 0.2rem;
+  background-color : hsla(0, 0%, 0%, 0.85);
+  grid-gap         : 8px;
+  grid-template    : 1.3fr repeat(9, 1fr)/ 1.3fr repeat(9, 1fr);
   /* display: none; */
-  grid-template: 2fr repeat(9, 1fr)/ 2fr repeat(9, 1fr);
-  grid-gap: 5px;
 }
 
 .multTable span {
-  display: block;
-  border: 1px hsl(43, 89%, 84%) dashed;
-  border-radius: 0.2rem;
-
-  /* height: 2rem;
-  width: 2rem; */
+  display       : block;
+  min-width     : 31px;
+  min-height    : 31px;
+  border        : 1px hsl(43, 89%, 84%) dashed;
+  border-radius : 0.2rem;
+  font-size     : 0.5rem;
+  /* height: 2rem; width: 2rem; */
 }
 
 .errors {
-  margin-left: 0.5rem;
+  margin-left : 0.5rem;
 }
 
 /* journal */
 
 .journal {
-  margin: 0.1rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display        : flex;
+  margin         : 0.1rem 1rem;
+  align-items    : center;
+  flex-direction : column;
 }
-h3{
-    font-size: 0.9rem;
-    display: inline-block;
-    font-style: italic;
-    transition: 0.3s;
+
+h3 {
+  display    : inline-block;
+  font-size  : 0.9rem;
+  font-style : italic;
+  transition : 0.3s;
 }
 
 h3:hover {
-  transform:scale(1.2);
-  font-weight: bold;
+  font-weight : bold;
+  transform   : scale(1.2);
 }
 
 .goodAnswers {
-  display: flex;
-  align-items:stretch;
-  justify-content:space-between;
-  flex-wrap: wrap;
+  display         : flex;
+  align-items     : stretch;
+  flex-wrap       : wrap;
+  justify-content : space-between;
 }
 
 .goodAnswers p {
-  min-width: 300px;
-  padding-left: 1rem;
+  min-width    : 300px;
+  padding-left : 1rem;
 }
