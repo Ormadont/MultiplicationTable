@@ -113,6 +113,52 @@ header {
   text-align: center;
 }
 
+/* footer */
+
+footer {
+  padding-top: 0.1rem;
+  border-top: solid 1px hsla(292, 25%, 24%, 0.9);
+}
+
+footer div {
+  display: inline-block;
+}
+
+.efforts {
+  margin-right: 0.5rem;
+}
+
+.multTable {
+  left: 0;
+  top:0;
+  z-index: 1;
+  position: absolute;
+
+  width: 100%;
+
+  background-color: hsla(0, 0%, 0%, 0.85);
+  color: hsl(43, 89%, 84%);
+  border-radius: 0.2rem;
+
+  display: grid;
+  /* display: none; */
+  grid-template: 2fr repeat(9, 1fr)/ 2fr repeat(9, 1fr);
+  grid-gap: 5px;
+}
+
+.multTable span {
+  display: block;
+  border: 1px hsl(43, 89%, 84%) dashed;
+  border-radius: 0.2rem;
+
+  /* height: 2rem;
+  width: 2rem; */
+}
+
+.errors {
+  margin-left: 0.5rem;
+}
+
 /* journal */
 
 .journal {
@@ -143,19 +189,4 @@ h3:hover {
 .goodAnswers p {
   min-width: 300px;
   padding-left: 1rem;
-}
-
-/* footer */
-
-footer {
-  padding-top: 0.1rem;
-  border-top: solid 1px hsla(292, 25%, 24%, 0.9);
-}
-
-footer div {
-  display: inline-block;
-}
-
-.errors {
-  margin-left: 1.5rem;
 }
