@@ -30,6 +30,10 @@ const effortsCount_span = document.getElementById('effortsCount');
 let errorsCount = 0;
 const errorsCount_span = document.getElementById('errorsCount');
 
+//знак вопроса, по нажатию на который должна появиться таблица умножения
+const multTableQ_span = document.getElementById('multTableQ');
+const multTable_div = document.querySelector('.multTable');
+
 // ---------------------------
 // debugger;
 
@@ -104,6 +108,19 @@ answer6_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer6_span)}
 });
 
+multTableQ_span.addEventListener('click',() => {
+  if (multTable_div.style.display === "none") {
+    initBoard();
+    multTable_div.style.display = "grid";
+  } else {
+    multTable_div.style.display = "none";
+  }
+
+})
+
+multTable_div.addEventListener('click', () => {
+  multTable_div.style.display = "none";
+})
 
 rankCount_span.addEventListener('click', () => {
   showRanks();
