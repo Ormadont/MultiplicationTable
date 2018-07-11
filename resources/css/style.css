@@ -186,11 +186,11 @@ h3 {
   width: 60px;
   height: 60px;
   border-radius: 50%;
+  border: hsl(43, 89%, 84%) 2px solid;
 }
 
 #multTableQ:hover {
-  background-color: hsla(292, 25%, 24%, 0.9);
-  color: hsl(43, 89%, 84%);
+  border: hsla(292, 25%, 24%, 0.9) 2px solid;
 }
 
 .goodAnswers {
