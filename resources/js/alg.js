@@ -43,6 +43,7 @@ initBoard();
 
 multTable_div.innerHTML = multTable;
 
+
 // ---------------------------------------
 
 function treatAnswer(element) {
@@ -111,8 +112,9 @@ answer6_span.addEventListener('click',() => {
 });
 
 multTableQ_span.addEventListener('click',() => {
+  initBoard();
   if (multTable_div.style.display === "none" || multTable_div.style.display === "") {
-    initBoard();
+    
     multTable_div.style.display = "grid";
   } else {
     multTable_div.style.display = "none";
@@ -338,16 +340,20 @@ function getRandomAnswer() {
 function createArrayForMTable() {
   const size = 10;
   var a = new Array(size);
+  let num="";
   for (i = 0; i < size; i++) {
     a[i] = new Array(size);
     for (j = 0; j < size; j++) {
       if (i === 0 || j === 0) {
-        a[i][j] = `<span>${(i+1) * (j+1) - 1}</span>`
+        num = i.toString() + j.toString();
+        a[i][j] = `<span id="n${num}">${(i+1) * (j+1) - 1}</span>`
       } else {
-        a[i][j] = `<span>${i * j}</span>`;
+        num = i.toString() + j.toString();
+        a[i][j] = `<span id="n${num}">${i * j}</span>`;
       }
     }
   }
+  a[0][0]='X';
   //преобразование в строку и удаление запятых
   return a.join("").replace(/,/g,"");
 }

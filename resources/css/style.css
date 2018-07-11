@@ -138,27 +138,26 @@ footer div {
 
 .multTable {
   z-index          : 1;
-  /* display          : grid; */
   position         : absolute;
   top              : 0;
-  left             : 0;
   width            : 100%;
   color            : hsl(43, 89%, 84%);
   border-radius    : 0.2rem;
-  background-color : hsla(0, 0%, 0%, 0.85);
+  background-color : hsla(0, 0%, 0%, 0.9);
   grid-gap         : 8px;
   grid-template    : 1.3fr repeat(9, 1fr)/ 1.3fr repeat(9, 1fr);
   display: none;
+  align-items: center;
+  max-width: 550px;
 }
 
 .multTable span {
   display       : block;
   min-width     : 31px;
   min-height    : 31px;
-  border        : 1px hsl(43, 89%, 84%) dashed;
-  border-radius : 0.2rem;
+  border-right: 1px hsl(43, 89%, 84%) dashed;
+  border-bottom: 1px hsl(43, 89%, 84%) dashed;
   font-size     : 0.5rem;
-  /* height: 2rem; width: 2rem; */
 }
 
 .errors {
