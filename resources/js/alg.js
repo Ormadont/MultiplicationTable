@@ -109,7 +109,7 @@ answer6_span.addEventListener('click',() => {
 });
 
 multTableQ_span.addEventListener('click',() => {
-  if (multTable_div.style.display === "none") {
+  if (multTable_div.style.display === "none" || multTable_div.style.display === "") {
     initBoard();
     multTable_div.style.display = "grid";
   } else {
