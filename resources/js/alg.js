@@ -30,12 +30,19 @@ const effortsCount_span = document.getElementById('effortsCount');
 let errorsCount = 0;
 const errorsCount_span = document.getElementById('errorsCount');
 
+//знак вопроса, по нажатию на который должна появиться таблица умножения
+const multTableQ_span = document.getElementById('multTableQ');
+const multTable_div = document.querySelector('.multTable');
+const multTable = createArrayForMTable();
 // ---------------------------
 // debugger;
 
 rankCount = Math.floor(Math.random()*8) + 2;
 
 initBoard();
+
+multTable_div.innerHTML = multTable;
+
 
 // ---------------------------------------
 
@@ -104,6 +111,20 @@ answer6_span.addEventListener('click',() => {
   if (!(answered())) {treatAnswer(answer6_span)}
 });
 
+multTableQ_span.addEventListener('click',() => {
+  initBoard();
+  if (multTable_div.style.display === "none" || multTable_div.style.display === "") {
+    
+    multTable_div.style.display = "grid";
+  } else {
+    multTable_div.style.display = "none";
+  }
+
+})
+
+multTable_div.addEventListener('click', () => {
+  multTable_div.style.display = "none";
+})
 
 rankCount_span.addEventListener('click', () => {
   showRanks();
@@ -308,4 +329,31 @@ function addParagraphOfErrors() {
 
 function getRandomAnswer() {
   return Math.floor(Math.random()*10)*rankCount;
+}
+
+//таблица умножения, первая строка и первый столбец - указатели
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+// [1, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+// ...
+// [8, 8, 16, 24, 32, 40, 48, 56, 64, 72]
+// [9, 9, 18, 27, 36, 45, 54, 63, 72, 81]
+function createArrayForMTable() {
+  const size = 10;
+  var a = new Array(size);
+  let num="";
+  for (i = 0; i < size; i++) {
+    a[i] = new Array(size);
+    for (j = 0; j < size; j++) {
+      if (i === 0 || j === 0) {
+        num = i.toString() + j.toString();
+        a[i][j] = `<span id="n${num}">${(i+1) * (j+1) - 1}</span>`
+      } else {
+        num = i.toString() + j.toString();
+        a[i][j] = `<span id="n${num}">${i * j}</span>`;
+      }
+    }
+  }
+  a[0][0]='X';
+  //преобразование в строку и удаление запятых
+  return a.join("").replace(/,/g,"");
 }
