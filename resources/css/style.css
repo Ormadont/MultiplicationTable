@@ -190,7 +190,7 @@ h3 {
 }
 
 #multTableQ:hover {
-  border: hsla(292, 25%, 24%, 0.9) 2px solid;
+  border-color: hsla(292, 25%, 24%, 0.9);
 }
 
 .goodAnswers {
