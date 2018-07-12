@@ -34,6 +34,8 @@ const errorsCount_span = document.getElementById('errorsCount');
 const multTableQ_span = document.getElementById('multTableQ');
 const multTable_div = document.querySelector('.multTable');
 const multTable = createArrayForMTable();
+
+
 // ---------------------------
 // debugger;
 
@@ -359,4 +361,89 @@ function createArrayForMTable() {
   a[0][0] = `<span id="n00">X</span>`;
   //преобразование в строку и удаление запятых
   return a.join("").replace(/,/g,"");
+}
+
+//предназначено для работы сразу после появлении на экране таблицы
+(function enhMultTable() {
+  const numSpansOfMultTable = 100;
+  let idName=``;
+  for (let i = 0; i < numSpansOfMultTable; i++) {
+    if (i<10) {
+      idName = `n0${i}`;
+    } else {
+      idName = `n${i}`;
+    }
+    document.getElementById(idName).addEventListener('mouseenter', (event) => {
+      // highlight the mouseover target
+      event.target.style.borderColor = "orange";
+
+      // reset the color after a short delay
+      setTimeout(function() {
+        event.target.style.borderColor = "";
+      }, 500);
+
+    }, false);
+
+    document.getElementById(idName).addEventListener('click', (event) => {
+      // highlight the click target
+      enhElem1(event.target);
+      event.target.style.fontWeight = "bold";
+      //покрасить номер столбца
+      enhElem1(`n0${getColNum(i)}`);
+      //покрасить номер строки
+      enhElem1(`n${getRowNum(i)}0`);
+
+      // reset the color after a short delay
+      setTimeout(function() {
+        deEnhElem(event.target);
+        //покрасить номер столбца
+        deEnhElem(`n0${getColNum(i)}`);
+        //покрасить номер строки
+        deEnhElem(`n${getRowNum(i)}0`);
+      }, 3000);
+    }, false);
+  }
+})()
+
+function getRowNum(rowAndCol) {
+  if (rowAndCol < 10) {
+    return 0;
+  } else {
+    return Math.floor(rowAndCol/10);
+  }
+}
+
+function getColNum(rowAndCol) {
+  return rowAndCol - 10*Math.floor(rowAndCol/10);
+}
+
+//цвет, бардюр, задний фон
+function enhElem1(Elem) {
+  let element;
+  if ((typeof Elem) === "string") { //id's name
+    element = document.getElementById(Elem);
+  }
+  else //event.target
+  {
+    element = Elem;
+  }
+  element.style.color = "hsla(292, 25%, 24%, 0.9)";
+  element.style.borderColor = "hsla(292, 25%, 24%, 0.9)";
+  element.style.backgroundColor = "hsl(43, 89%, 84%)";
+}
+
+//вернуть исходные цвета
+function deEnhElem(Elem) {
+  let element;
+  if ((typeof Elem) === "string") { //id's name
+    element = document.getElementById(Elem);
+  }
+  else //event.target
+  {
+    element = Elem;
+  }
+  element.style.color = "";
+  element.style.borderColor = "";
+  element.style.backgroundColor = "";
+  element.style.fontWeight = "normal";
 }
