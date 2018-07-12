@@ -132,6 +132,7 @@ footer div {
   margin-right : 0.5rem;
 }
 
+/* multiplication table */
 #multTableQ {
 
 }
@@ -158,6 +159,22 @@ footer div {
   border-right: 1px hsl(43, 89%, 84%) dashed;
   border-bottom: 1px hsl(43, 89%, 84%) dashed;
   font-size     : 0.5rem;
+}
+
+#n00 {
+  font-weight: bold;
+  padding-top: 10px;
+  margin-top: 10px;
+  padding-left: 10px;
+  margin-left: 10px;
+}
+
+#n00:hover, #n00:active{
+  color: yellow;
+  border-color: yellow;
+  transition-duration : 0.6s;
+  border-style:double;
+  transition-property: all;
 }
 
 .errors {

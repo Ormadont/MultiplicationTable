@@ -114,7 +114,7 @@ answer6_span.addEventListener('click',() => {
 multTableQ_span.addEventListener('click',() => {
   initBoard();
   if (multTable_div.style.display === "none" || multTable_div.style.display === "") {
-    
+
     multTable_div.style.display = "grid";
   } else {
     multTable_div.style.display = "none";
@@ -122,7 +122,10 @@ multTableQ_span.addEventListener('click',() => {
 
 })
 
-multTable_div.addEventListener('click', () => {
+
+//закрытие по верхнему левому элементу
+const x_span = document.getElementById('n00');
+x_span.addEventListener('click', () => {
   multTable_div.style.display = "none";
 })
 
@@ -353,7 +356,7 @@ function createArrayForMTable() {
       }
     }
   }
-  a[0][0]='X';
+  a[0][0] = `<span id="n00">X</span>`;
   //преобразование в строку и удаление запятых
   return a.join("").replace(/,/g,"");
 }
