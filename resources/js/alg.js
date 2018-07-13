@@ -380,12 +380,13 @@ let currentCElement1=document.getElementById(`n00`); //текущий выдел
       idName = `n${i}`;
     }
     document.getElementById(idName).addEventListener('mouseover', (event) => {
+      let rndColor = `hsla(${Math.floor(Math.random()*358)} , 100%, 28%, 0.7)`;
       // highlight the mouseover target
-      enhElem2(event.target);
+      enhElem2(event.target, rndColor);
       //покрасить номер столбца
-      enhElem2(`n0${getColNum(i)}`);
+      enhElem2(`n0${getColNum(i)}`, rndColor);
       //покрасить номер строки
-      enhElem2(`n${getRowNum(i)}0`);
+      enhElem2(`n${getRowNum(i)}0`, rndColor);
 
       // reset the color after a short delay
       setTimeout(function() {
@@ -423,7 +424,7 @@ let currentCElement1=document.getElementById(`n00`); //текущий выдел
         currentElement1 = event.target;
         currentRElement1 = `n${getRowNum(i)}0`;
         currentCElement1 = `n0${getColNum(i)}`;
-      }, 500);
+      }, 100);
     }, false);
   }
 })()
@@ -452,10 +453,11 @@ function enhElem1(Elem) {
   }
   element.style.color = "hsl(43, 89%, 84%)";
   element.style.backgroundColor = "hsla(0, 0%, 0%, 0.7)";
+  element.style.transform = "scale(1.2)";
 }
 
 //выделение по движению
-function enhElem2(Elem) {
+function enhElem2(Elem, rndColor) {
   let element;
   if ((typeof Elem) === "string") { //id's name
     element = document.getElementById(Elem);
@@ -464,7 +466,7 @@ function enhElem2(Elem) {
   {
     element = Elem;
   }
-  element.style.borderColor = "red";
+  element.style.borderColor = rndColor;
   element.style.fontWeight = "bold";
 }
 
@@ -480,6 +482,7 @@ function deEnhElemClick(Elem) {
   }
   element.style.color = "";
   element.style.backgroundColor = "";
+  element.style.transform = "";
 }
 
 //вернуть исходные цвета по движению

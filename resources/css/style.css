@@ -142,7 +142,7 @@ footer div {
   position         : absolute;
   top              : 0;
   width            : 100%;
-  max-width        : 550px;
+  /* max-width        : 550px; */
   color            : hsla(0, 0%, 0%, 0.7);
   border-radius    : 0.2rem;
   background-color : hsl(43, 89%, 84%);
@@ -155,8 +155,8 @@ footer div {
   display       : block;
   min-width     : 31px;
   min-height    : 31px;
-  border-right  : 2px hsl(42, 30%, 73%) dashed;
-  border-bottom : 2px hsl(42, 30%, 73%) dashed;
+  border-right  : 5px hsl(42, 30%, 73%) dashed;
+  border-bottom : 5px hsl(42, 30%, 73%) dashed;
   font-size     : 0.5rem;
 }
 
@@ -170,8 +170,7 @@ footer div {
 
 #n00:active,
 #n00:hover {
-  color               : yellow;
-  border-color        : yellow;
+  color               : hsl(0, 100%, 50%);
   border-style        : double;
   transition-property : all;
   transition-duration : 0.6s;
