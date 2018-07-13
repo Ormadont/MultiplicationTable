@@ -364,30 +364,48 @@ function createArrayForMTable() {
 }
 
 //предназначено для работы сразу после появлении на экране таблицы
+let currentElement=document.getElementById(`n00`); //текущий выделенный элемент таблицы, инициализирован первым элементом табицы
+let currentElement1=document.getElementById(`n00`); //текущий выделенный элемент таблицы, инициализирован первым элементом табицы
+let currentRElement=document.getElementById(`n00`); //текущая выделенная строка таблицы, инициализирована первым элементом табицы
+let currentCElement=document.getElementById(`n00`); //текущий выделенный столбец таблицы, инициализирован первым элементом табицы
+let currentRElement1=document.getElementById(`n00`); //текущая выделенная строка таблицы, инициализирована первым элементом табицы
+let currentCElement1=document.getElementById(`n00`); //текущий выделенный столбец таблицы, инициализирован первым элементом табицы
 (function enhMultTable() {
   const numSpansOfMultTable = 100;
   let idName=``;
-  for (let i = 0; i < numSpansOfMultTable; i++) {
+  for (let i = 0; i < numSpansOfMultTable; i++) { //i - номер ячейки таблицы
     if (i<10) {
       idName = `n0${i}`;
     } else {
       idName = `n${i}`;
     }
-    document.getElementById(idName).addEventListener('mouseenter', (event) => {
+    document.getElementById(idName).addEventListener('mouseover', (event) => {
       // highlight the mouseover target
-      event.target.style.borderColor = "orange";
+      enhElem2(event.target);
+      //покрасить номер столбца
+      enhElem2(`n0${getColNum(i)}`);
+      //покрасить номер строки
+      enhElem2(`n${getRowNum(i)}0`);
 
       // reset the color after a short delay
       setTimeout(function() {
-        event.target.style.borderColor = "";
+        deEnhElemMove(currentElement);
+        if (currentRElement != `n${getRowNum(i)}0`) {
+          deEnhElemMove(currentRElement);
+        }
+        if (currentCElement != `n0${getColNum(i)}`) {
+          deEnhElemMove(currentCElement);
+        }
+        currentElement = event.target;
+        currentRElement = `n${getRowNum(i)}0`;
+        currentCElement = `n0${getColNum(i)}`;
       }, 500);
 
     }, false);
 
     document.getElementById(idName).addEventListener('click', (event) => {
-      // highlight the click target
+      // highlight the mouseover target
       enhElem1(event.target);
-      event.target.style.fontWeight = "bold";
       //покрасить номер столбца
       enhElem1(`n0${getColNum(i)}`);
       //покрасить номер строки
@@ -395,12 +413,17 @@ function createArrayForMTable() {
 
       // reset the color after a short delay
       setTimeout(function() {
-        deEnhElem(event.target);
-        //покрасить номер столбца
-        deEnhElem(`n0${getColNum(i)}`);
-        //покрасить номер строки
-        deEnhElem(`n${getRowNum(i)}0`);
-      }, 3000);
+        deEnhElemClick(currentElement1);
+        if (currentRElement1 != `n${getRowNum(i)}0`) {
+          deEnhElemClick(currentRElement1);
+        }
+        if (currentCElement1 != `n0${getColNum(i)}`) {
+          deEnhElemClick(currentCElement1);
+        }
+        currentElement1 = event.target;
+        currentRElement1 = `n${getRowNum(i)}0`;
+        currentCElement1 = `n0${getColNum(i)}`;
+      }, 500);
     }, false);
   }
 })()
@@ -417,7 +440,7 @@ function getColNum(rowAndCol) {
   return rowAndCol - 10*Math.floor(rowAndCol/10);
 }
 
-//цвет, бардюр, задний фон
+//выделение по нажатию
 function enhElem1(Elem) {
   let element;
   if ((typeof Elem) === "string") { //id's name
@@ -427,13 +450,26 @@ function enhElem1(Elem) {
   {
     element = Elem;
   }
-  element.style.color = "hsla(292, 25%, 24%, 0.9)";
-  element.style.borderColor = "hsla(292, 25%, 24%, 0.9)";
-  element.style.backgroundColor = "hsl(43, 89%, 84%)";
+  element.style.color = "hsl(43, 89%, 84%)";
+  element.style.backgroundColor = "hsla(0, 0%, 0%, 0.7)";
 }
 
-//вернуть исходные цвета
-function deEnhElem(Elem) {
+//выделение по движению
+function enhElem2(Elem) {
+  let element;
+  if ((typeof Elem) === "string") { //id's name
+    element = document.getElementById(Elem);
+  }
+  else //event.target
+  {
+    element = Elem;
+  }
+  element.style.borderColor = "red";
+  element.style.fontWeight = "bold";
+}
+
+//вернуть исходные цвета по нажатию
+function deEnhElemClick(Elem) {
   let element;
   if ((typeof Elem) === "string") { //id's name
     element = document.getElementById(Elem);
@@ -443,7 +479,19 @@ function deEnhElem(Elem) {
     element = Elem;
   }
   element.style.color = "";
-  element.style.borderColor = "";
   element.style.backgroundColor = "";
+}
+
+//вернуть исходные цвета по движению
+function deEnhElemMove(Elem) {
+  let element;
+  if ((typeof Elem) === "string") { //id's name
+    element = document.getElementById(Elem);
+  }
+  else //event.target
+  {
+    element = Elem;
+  }
+  element.style.borderColor = "";
   element.style.fontWeight = "normal";
 }

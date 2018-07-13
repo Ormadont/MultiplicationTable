@@ -133,48 +133,48 @@ footer div {
 }
 
 /* multiplication table */
-#multTableQ {
 
-}
+#multTableQ {}
 
 .multTable {
   z-index          : 1;
+  display          : none;
   position         : absolute;
   top              : 0;
   width            : 100%;
-  color            : hsl(43, 89%, 84%);
+  max-width        : 550px;
+  color            : hsla(0, 0%, 0%, 0.7);
   border-radius    : 0.2rem;
-  background-color : hsla(0, 0%, 0%, 0.9);
+  background-color : hsl(43, 89%, 84%);
+  align-items      : center;
   grid-gap         : 8px;
   grid-template    : 1.3fr repeat(9, 1fr)/ 1.3fr repeat(9, 1fr);
-  display: none;
-  align-items: center;
-  max-width: 550px;
 }
 
 .multTable span {
   display       : block;
   min-width     : 31px;
   min-height    : 31px;
-  border-right: 1px hsl(43, 89%, 84%) dashed;
-  border-bottom: 1px hsl(43, 89%, 84%) dashed;
+  border-right  : 2px hsl(42, 30%, 73%) dashed;
+  border-bottom : 2px hsl(42, 30%, 73%) dashed;
   font-size     : 0.5rem;
 }
 
 #n00 {
-  font-weight: bold;
-  padding-top: 10px;
-  margin-top: 10px;
-  padding-left: 10px;
-  margin-left: 10px;
+  margin-top   : 10px;
+  margin-left  : 10px;
+  padding-top  : 10px;
+  padding-left : 10px;
+  font-weight  : bold;
 }
 
-#n00:hover, #n00:active{
-  color: yellow;
-  border-color: yellow;
+#n00:active,
+#n00:hover {
+  color               : yellow;
+  border-color        : yellow;
+  border-style        : double;
+  transition-property : all;
   transition-duration : 0.6s;
-  border-style:double;
-  transition-property: all;
 }
 
 .errors {
@@ -197,16 +197,16 @@ h3 {
 }
 
 #multTableQ {
-  display: inline-block;
-  transition : 0.6s;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: hsl(43, 89%, 84%) 2px solid;
+  display       : inline-block;
+  width         : 60px;
+  height        : 60px;
+  border        : hsl(43, 89%, 84%) 2px solid;
+  border-radius : 50%;
+  transition    : 0.6s;
 }
 
 #multTableQ:hover {
-  border-color: hsla(292, 25%, 24%, 0.9);
+  border-color : hsla(292, 25%, 24%, 0.9);
 }
 
 .goodAnswers {
