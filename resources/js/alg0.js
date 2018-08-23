@@ -55,7 +55,6 @@ const qs = {
 
   //сформировать 5 неверных вариантов ответа
   computeRndA() {
-     const array = [];
      this.rndA = getRndArray(qs.numRndA, this.rightA).map(x => x*this.curQ[0]);
   },
 
@@ -81,24 +80,13 @@ const qs = {
     //сформировать вараинты неверных ответов
     qs.computeRndA();
   },
+
+  //установить новый основной множитель
+  setNewMult(newMult) {
+    this.initQA();
+    this.listQ[0] = newMult;
+  }
 };
-
-
-// //получить массив из цифр вида [6, 0, 9, 1, 3, 5, 2, 4, 8, 7]
-// //числа от 0 до 9 включительно, неповтаряются, порядок случайный
-// function getRndArray(lengthArray) {
-//   const array = [];
-//   let rndEl = Math.floor(Math.random()*10);
-//   for (let i = 0; i < lengthArray; i++) {
-//     if (array.length != 0) {
-//       while (array.includes(rndEl)) {
-//         rndEl = Math.floor(Math.random()*10);
-//       }
-//     }
-//     array.push(rndEl);
-//   }
-//   return array;
-// };
 
 //получить массив из цифр вида [6, 0, 9, 1, 3, 5, 2, 4, 8, 7]
 //числа от 0 до 9 включительно кроме числа wastEl, неповтаряются, порядок случайный
@@ -121,27 +109,9 @@ function getRndArray(lengthArray, wastEl = -1) {
   return array;
 };
 
-
 //получить и удалить случайный элемент массива
 function takeRemoveRndEl(array) {
   const randomIndex = Math.floor(Math.random()*array.length); //рандомный индекс первого массива
   const rand_element = array.splice(randomIndex,1) //удалённый элемент (массив) первого массива для второго массива
   return rand_element[0];
 };
-
-
-// //перемешивание произвольного массива, где array - массив
-// function mixUp(origArray) {
-//   const mixUpArray = [];
-//   while (origArray.length>0) {
-//     mixUpArray.push(takeRndEl(origArray)[0]); //добавляем элемент в новый массив
-//   }
-//   return mixUpArray;
-// }
-//
-// //получить и удалить случайный элемент массива
-// function takeRndEl(array) {
-//   const randomIndex = Math.floor(Math.random()*array.length); //рандомный индекс первого массива
-//   const rand_element = array.splice(randomIndex,1) //удалённый элемент (массив) первого массива для второго массива
-//   return rand_element;
-// }
