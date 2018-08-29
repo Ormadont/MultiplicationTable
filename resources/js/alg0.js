@@ -68,15 +68,18 @@ const modelMult = {
       this.userRight = true;
     } else {
       this.userRight = false;
+      viewMult.errorsCount_span.innerHTML =
+        parseInt(viewMult.errorsCount_span.textContent)+1;
     }
     // показать только ответ пользователя
     viewMult.showUserAnswer();
     // показать знак равенства или неравенства
     viewMult.showSignOfEqual();
-    //следующий вопрос
     setTimeout(()=> {
+      //следующий вопрос
       this.nextQuestion();
-      console.log("!");
+      //показать количество непоказанных вопросов
+      viewMult.updateResidue();
     },2000);
   },
   //следующий вопрос
@@ -154,10 +157,10 @@ const viewMult = {
   signOfQuestion: document.getElementById('signOfQuestion'),
   // ответ пользователя
   userAnswer: document.getElementById('userAnswer'),
-  // //Количество попыток совершённых пользователем
-  // effortsCount_span: document.getElementById('effortsCount'),
-  // //Количество ошибок совершённых пользователем
-  // errorsCount_span: document.getElementById('errorsCount'),
+  //Количество вопросов без ответа пользователя
+  residueCount_span: document.getElementById('residueCount'),
+  //Количество ошибок совершённых пользователем
+  errorsCount_span: document.getElementById('errorsCount'),
   // //Таблица умножения
   // multTable_div: document.querySelector('.multTable'),
   // //Первый множитель
@@ -173,6 +176,12 @@ const viewMult = {
     this.hideAnswers();
     this.hideUserAnswer();
     this.showSignOfQuestion();
+    this.updateResidue();
+    this.errorsCount_span.innerHTML = 0;
+  },
+  //показать количество непоказанных вопросов
+  updateResidue(){
+    this.residueCount_span.innerHTML = modelMult.listQ.length;
   },
   //показать знак вопроса
   showSignOfQuestion() {
