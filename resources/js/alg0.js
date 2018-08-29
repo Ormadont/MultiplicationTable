@@ -46,32 +46,56 @@ const modelMult = {
     //сформировать варианты ответа
     this.computeRndA();
   },
+  //установить действия по событиям
+  addEvents() {
+    // знак вопроса
+    viewMult.signOfQuestion.addEventListener('click', ()=> viewMult.showAnswers());
+    // варианты ответа
+    viewMult.answers_span.forEach(el =>
+      el.addEventListener('click', ()=> this.treatAnswer(el)));
+  },
   //сформировать 6 вариантов ответа
   computeRndA() {
      this.rndA = getRndArray(this.numRndErrorAnswers, this.rightA/this.curQ[0]).map(x => x*this.curQ[0]);
      mixUp(this.rndA.push(this.rightA));
   },
-  //Реакция на ответ пользователя
-  responseToUserAnswer() {
-
-    //увеличть счётчик ответов пользователя
-    this.numUserA++;
-
+  //Получить и проверить ответ пользователя
+  treatAnswer(el) {
+    //получить ответ пользователя
+    this.userA = parseInt(el.textContent);
     //обновить результат проверки ответа пользователя
     if (this.userA === this.rightA) {
       this.userRight = true;
     } else {
       this.userRight = false;
     }
-
+    // показать только ответ пользователя
+    viewMult.showUserAnswer();
+    // показать знак равенства или неравенства
+    viewMult.showSignOfEqual();
+    //следующий вопрос
+    setTimeout(()=> {
+      this.nextQuestion();
+      console.log("!");
+    },2000);
+  },
+  //следующий вопрос
+  nextQuestion() {
     //установить второй множитель, изъять элемент из массива вторых множителей
     this.curQ[1] = takeRemoveRndEl(this.listQ);
-
-    //получить верный ответ
-    this.rightA = this.curQ[0] * this.curQ[1];
-
-    //сформировать вараинты неверных ответов
-    this.computeRndA();
+    if (this.curQ[1] != undefined) {
+      //получить верный ответ
+      this.rightA = this.curQ[0] * this.curQ[1];
+      //сформировать вараинты ответа
+      this.computeRndA();
+      //вернуть в исходное состояние оценку ответа пользователя
+      this.userRight = true;
+      //отрисовать
+      viewMult.hideUserAnswer();
+      viewMult.showQuestion();
+      viewMult.showSignOfEqual();
+      viewMult.showSignOfQuestion();
+    }
   },
   //установить новый основной множитель
   setNewMult(newMult) {
@@ -101,7 +125,7 @@ function getRndArray(lengthArray, wastEl = -1) {
   return array;
 };
 
-//перемешивание произвольного массива, где array - массив
+//перемешать произвольный массив
 function mixUp(origArray) {
   const mixUpArray = [];
   while (origArray.length>0) {
@@ -124,35 +148,47 @@ function takeRemoveRndEl(array) {
 const viewMult = {
   //Варианты ответа
   answers_span: [],
-  //Количество попыток совершённых пользователем
-  effortsCount_span: document.getElementById('effortsCount'),
-  //Знак равенства
-  equal_span: document.getElementById('equal'),
-  //Количество ошибок совершённых пользователем
-  errorsCount_span: document.getElementById('errorsCount'),
-  //Таблица умножения
-  multTable_div: document.querySelector('.multTable'),
-  //Знак вопроса
-  multTableQ_span: document.getElementById('multTableQ'),
-  //Вопрос вида: 3*5
+  //Вопрос вида: 3 * 5
   question_span: document.getElementById('question'),
-  //Первый множитель
-  rankCount_span: document.getElementById('rankCount'),
-  // Контейнер элементов для выбора первого множителя. По умолчанию скрыт
-  ranks_div: document.querySelector('.ranks'),
+  //знак вопроса
+  signOfQuestion: document.getElementById('signOfQuestion'),
+  // ответ пользователя
+  userAnswer: document.getElementById('userAnswer'),
+  // //Количество попыток совершённых пользователем
+  // effortsCount_span: document.getElementById('effortsCount'),
+  // //Количество ошибок совершённых пользователем
+  // errorsCount_span: document.getElementById('errorsCount'),
+  // //Таблица умножения
+  // multTable_div: document.querySelector('.multTable'),
+  // //Первый множитель
+  // rankCount_span: document.getElementById('rankCount'),
+  // // Контейнер элементов для выбора первого множителя. По умолчанию скрыт
+  // ranks_div: document.querySelector('.ranks'),
   //начальное представление
   init() {
     for (let i = 0; i < modelMult.rndA.length; i++)
       this.answers_span.push(document.getElementById(`answer${i+1}`));
     this.showQuestion();
-    this.showSign();
+    this.showSignOfEqual();
     this.hideAnswers();
-
-    //...
+    this.hideUserAnswer();
+    this.showSignOfQuestion();
+  },
+  //показать знак вопроса
+  showSignOfQuestion() {
+    signOfQuestion.style.display = "inline-block";
+  },
+  //скрыть знак вопроса
+  hideSignOfQuestion() {
+    signOfQuestion.style.display = "none";
   },
   //Показать текущий вопрос
   showQuestion() {
     this.question_span.innerHTML = `${modelMult.curQ[0]} * ${modelMult.curQ[1]}`;
+  },
+  // скрыть ответ пользователя
+  hideUserAnswer() {
+    userAnswer.style.display = "none";
   },
   //показать варианты ответа
   showAnswers() {
@@ -160,26 +196,42 @@ const viewMult = {
       this.answers_span[i].innerHTML = modelMult.rndA[i];
       this.answers_span[i].style.display = "inline-block";
     };
+    this.hideSignOfQuestion();
+  },
+  //показать ответ пользователя только
+  showUserAnswer() {
+    this.hideAnswers();
+    this.hideSignOfQuestion();
+    this.userAnswer.textContent = modelMult.userA;
+    this.userAnswer.style.display = "inline-block";
   },
   //скрыть варианты ответа
   hideAnswers() {
     this.answers_span.forEach(el => el.style.display = "none");
-    this.answers_span[0].innerHTML = '?';
-    this.answers_span[0].style.display = 'inline-block';
+    this.showSignOfQuestion();
   },
   //показать знак равенства или неравенства - истина, ложь
-  showSign() {
+  showSignOfEqual() {
       if (modelMult.userRight) {
-        this.equal_span.innerHTML = '='
+        document.getElementById('equal').innerHTML = '='
       } else {
-        this.equal_span.innerHTML = '&ne;'
+        document.getElementById('equal').innerHTML = '&ne;'
       }
   },
 
 };
 
-// --- Controller ---
 
 const controlMult = {
+  start() {
+    modelMult.init();
+    viewMult.init();
+    modelMult.addEvents();
+  }
+};
 
-}
+document.onreadystatechange = () => {
+  if (document.readyState === 'complete') {
+    controlMult.start();
+  }
+};
