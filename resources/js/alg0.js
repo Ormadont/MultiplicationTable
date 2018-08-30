@@ -67,7 +67,6 @@ const modelMult = {
     this.init();
     viewMult.init();
   },
-
   //сформировать 6 вариантов ответа
   computeRndA() {
      this.rndA = getRndArray(this.numRndErrorAnswers, this.rightA/this.curQ[0]).map(x => x*this.curQ[0]);
@@ -82,6 +81,7 @@ const modelMult = {
       this.userRight = true;
     } else {
       this.userRight = false;
+      this.addGoodAnswer();
       viewMult.errorsCount_span.innerHTML =
         parseInt(viewMult.errorsCount_span.textContent)+1;
     }
@@ -113,7 +113,16 @@ const modelMult = {
       viewMult.showSignOfEqual();
       viewMult.showSignOfQuestion();
     }
-  }
+  },
+  //добавить верный ответ
+  addGoodAnswer() {
+    const para = document.createElement("p");
+    const answer = `${this.curQ[0]} * ${this.curQ[1]} = ${this.rightA}`;
+    const node = document.createTextNode(answer);
+    para.appendChild(node);
+    const el = document.querySelector(".goodAnswers");
+    el.appendChild(para);
+  },
 };
 
 //получить массив из цифр вида [6, 0, 9, 1, 3, 5, 2, 4, 8, 7]
