@@ -25,9 +25,6 @@ const modelMult = {
     //получить массив вопросов - 10 целых чисел
     this.listQ = getRndArray(10);
 
-    //установить первый основной множитель
-    this.curQ[0] = Math.floor(Math.random()*9) + 1;
-
     //установить второй множитель, изъять элемент из массива вторых множителей
     this.curQ[1] = takeRemoveRndEl(this.listQ);
 
@@ -53,7 +50,24 @@ const modelMult = {
     // варианты ответа
     viewMult.answers_span.forEach(el =>
       el.addEventListener('click', ()=> this.treatAnswer(el)));
+    // вход на выбор множителя
+    viewMult.rankCount_span.addEventListener('click', ()=> viewMult.showRanks());
+    for (let i = 2; i < 10; i++) {
+      document.getElementById(`rankCount${i}`).addEventListener('click', el => {
+        this.setRank(parseInt(el.target.textContent));
+      });
+    };
   },
+  // setRank
+  setRank(newRank) {
+    viewMult.hideRanks();
+    viewMult.rankCount_span.innerHTML = newRank;
+    this.curQ[0] = newRank;
+    //сброс состояний
+    this.init();
+    viewMult.init();
+  },
+
   //сформировать 6 вариантов ответа
   computeRndA() {
      this.rndA = getRndArray(this.numRndErrorAnswers, this.rightA/this.curQ[0]).map(x => x*this.curQ[0]);
@@ -99,12 +113,7 @@ const modelMult = {
       viewMult.showSignOfEqual();
       viewMult.showSignOfQuestion();
     }
-  },
-  //установить новый основной множитель
-  setNewMult(newMult) {
-    this.initQA();
-    this.listQ[0] = newMult;
-  },
+  }
 };
 
 //получить массив из цифр вида [6, 0, 9, 1, 3, 5, 2, 4, 8, 7]
@@ -163,8 +172,10 @@ const viewMult = {
   errorsCount_span: document.getElementById('errorsCount'),
   // //Таблица умножения
   // multTable_div: document.querySelector('.multTable'),
-  // //Первый множитель
-  // rankCount_span: document.getElementById('rankCount'),
+  //Первый множитель
+  rankCount_span: document.getElementById('rankCount'),
+  // меню выбора множителей
+  ranks_div: document.querySelector('.ranks'),
   // // Контейнер элементов для выбора первого множителя. По умолчанию скрыт
   // ranks_div: document.querySelector('.ranks'),
   //начальное представление
@@ -177,7 +188,17 @@ const viewMult = {
     this.hideUserAnswer();
     this.showSignOfQuestion();
     this.updateResidue();
+    //обнулить число ошибок
     this.errorsCount_span.innerHTML = 0;
+    //показать первый основной множитель
+    this.rankCount_span.innerHTML = modelMult.curQ[0];
+  },
+  // показать меню выбора множителей
+  showRanks() {
+    this.ranks_div.style.display = "flex";
+  },
+  hideRanks() {
+    this.ranks_div.style.display = "none";
   },
   //показать количество непоказанных вопросов
   updateResidue(){
@@ -227,12 +248,11 @@ const viewMult = {
         document.getElementById('equal').innerHTML = '&ne;'
       }
   },
-
 };
-
 
 const controlMult = {
   start() {
+    modelMult.curQ[0] = Math.floor(Math.random()*8) + 2;
     modelMult.init();
     viewMult.init();
     modelMult.addEvents();
