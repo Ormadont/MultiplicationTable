@@ -167,58 +167,58 @@ span.header {
 }
 
 span.r1 {
-  background-color    : hsla(0, 60%, 33%, 0.9);
+  background-color    : hsla(0, 32%, 30%, 0.9);
 }
 span.r2 {
-  background-color    : hsla(138, 69%, 64%, 1);
+  background-color    : hsla(40, 32%, 30%, 0.9);
 }
 span.r3 {
-  background-color    : hsla(80, 60%, 33%, 0.9);
+  background-color    : hsla(80, 32%, 30%, 0.9);
 }
 span.r4 {
-  background-color    : hsla(120, 60%, 33%, 0.9);
+  background-color    : hsla(120, 32%, 30%, 0.9);
 }
 span.r5 {
-  background-color    : hsla(160, 60%, 33%, 0.9);
+  background-color    : hsla(160, 32%, 30%, 0.9);
 }
 span.r6 {
-  background-color    : hsla(200, 60%, 33%, 0.9);
+  background-color    : hsla(200, 32%, 30%, 0.9);
 }
 span.r7 {
-  background-color    : hsla(286, 59%, 33%, 0.74);
+  background-color    : hsla(286, 32%, 30%, 0.9);
 }
 span.r8 {
-  background-color    : hsla(280, 60%, 33%, 0.9);
+  background-color    : hsla(280, 32%, 30%, 0.9);
 }
 span.r9 {
-  background-color    : hsla(320, 60%, 33%, 0.9);
+  background-color    : hsla(320, 32%, 30%, 0.9);
 }
 span.c1 {
-  border-color: hsla(0, 78%, 64%, 0.72);
+  border-color: hsla(0, 44%, 47%, 0.72);
 }
 span.c2 {
-  border-color: hsla(40, 78%, 64%, 0.72);
+  border-color: hsla(40, 44%, 47%, 0.72);
 }
 span.c3 {
-  border-color: hsla(80, 78%, 64%, 0.72);
+  border-color: hsla(80, 44%, 47%, 0.72);
 }
 span.c4 {
-  border-color: hsla(120, 78%, 64%, 0.72);
+  border-color: hsla(120, 44%, 47%, 0.72);
 }
 span.c5 {
-  border-color: hsla(160, 78%, 64%, 0.72);
+  border-color: hsla(160, 44%, 47%, 0.72);
 }
 span.c6 {
-  border-color: hsla(199, 58%, 47%, 0.5);
+  border-color: hsla(200, 44%, 47%, 0.72);
 }
 span.c7 {
-  border-color: hsla(240, 78%, 64%, 0.72);
+  border-color: hsla(240, 44%, 47%, 0.72);
 }
 span.c8 {
-  border-color: hsla(280, 78%, 64%, 0.72);
+  border-color: hsla(280, 44%, 47%, 0.72);
 }
 span.c9 {
-  border-color: hsla(320, 78%, 64%, 0.72);
+  border-color: hsla(320, 44%, 47%, 0.72);
 }
 
 #n00 {
