@@ -132,31 +132,93 @@ footer div {
   margin-right : 0.5rem;
 }
 
-/* multiplication table */
-
-#multTableQ {}
+/* Таблица Пифагора */
 
 .multTable {
   z-index          : 1;
   display          : none;
   position         :relative;
-  top              : -7.7rem;
+  top              : -9rem;
   margin-left: auto;
   margin-right: auto;
-  width        : 600px; 
+  width        : 650px;
   color            : hsla(0, 0%, 0%, 0.7);
   border-radius    : 0.2rem;
   background-color : hsl(43, 89%, 84%);
   align-items      : center;
-  grid-template    : 1.3fr repeat(9, 1fr)/ 1.3fr repeat(9, 1fr);
+  grid-template    : repeat(10, 1fr)/ repeat(10, 1fr);
 }
 
 .multTable span {
   display       : block;
-  border-right  : 1px hsl(42, 30%, 73%) dashed;
-  border-bottom : 1px hsl(42, 30%, 73%) dashed;
   font-size     : 0.7rem;
   text-align:center;
+  color               : hsl(43, 89%, 84%);
+  background-color    : hsla(292, 25%, 24%, 0.9);
+  border-color: grey;
+  border-style: groove;
+  border-width: thick;
+  color: hsla(170, 29%, 92%, 0.96);
+}
+
+span.header {
+  border-color: hsl(43, 89%, 84%);
+  border-style:outset;
+}
+
+span.r1 {
+  background-color    : hsla(0, 60%, 33%, 0.9);
+}
+span.r2 {
+  background-color    : hsla(138, 69%, 64%, 1);
+}
+span.r3 {
+  background-color    : hsla(80, 60%, 33%, 0.9);
+}
+span.r4 {
+  background-color    : hsla(120, 60%, 33%, 0.9);
+}
+span.r5 {
+  background-color    : hsla(160, 60%, 33%, 0.9);
+}
+span.r6 {
+  background-color    : hsla(200, 60%, 33%, 0.9);
+}
+span.r7 {
+  background-color    : hsla(286, 59%, 33%, 0.74);
+}
+span.r8 {
+  background-color    : hsla(280, 60%, 33%, 0.9);
+}
+span.r9 {
+  background-color    : hsla(320, 60%, 33%, 0.9);
+}
+span.c1 {
+  border-color: hsla(0, 78%, 64%, 0.72);
+}
+span.c2 {
+  border-color: hsla(40, 78%, 64%, 0.72);
+}
+span.c3 {
+  border-color: hsla(80, 78%, 64%, 0.72);
+}
+span.c4 {
+  border-color: hsla(120, 78%, 64%, 0.72);
+}
+span.c5 {
+  border-color: hsla(160, 78%, 64%, 0.72);
+}
+span.c6 {
+  border-color: hsla(199, 58%, 47%, 0.5);
+}
+span.c7 {
+  border-color: hsla(240, 78%, 64%, 0.72);
+}
+span.c8 {
+  border-color: hsla(280, 78%, 64%, 0.72);
+}
+span.c9 {
+  border-color: hsla(320, 78%, 64%, 0.72);
 }
 
 #n00 {

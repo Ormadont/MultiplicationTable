@@ -193,7 +193,7 @@ const viewMult = {
         if (this.multTable_div.childElementCount == 0) {
             this.multTable_div.innerHTML = this.createArrayForMTable();
         }
-        
+
     },
 
     //создание набора тэгов таблицы Пифагора
@@ -204,12 +204,11 @@ const viewMult = {
         for (let i = 0; i < size; i++) {
             a[i] = new Array(size);
             for (let j = 0; j < size; j++) {
+              num = i.toString() + j.toString();
                 if (i === 0 || j === 0) {
-                    num = i.toString() + j.toString();
-                    a[i][j] = `<span id="n${num}">${(i + 1) * (j + 1) - 1}</span>`
+                    a[i][j] = `<span class="header r${i} c${j}" id="n${num}">${(i + 1) * (j + 1) - 1}</span>`
                 } else {
-                    num = i.toString() + j.toString();
-                    a[i][j] = `<span id="n${num}">${i * j}</span>`;
+                    a[i][j] = `<span class="r${i} c${j}" id="n${num}">${i * j}</span>`;
                 }
             }
         }
@@ -293,7 +292,7 @@ const viewMult = {
 };
 
 const controlMult = {
-    start() { 
+    start() {
         modelMult.curQ[0] = Math.floor(Math.random() * 8) + 2;
         modelMult.init();
         viewMult.init();
