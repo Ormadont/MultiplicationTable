@@ -139,42 +139,39 @@ footer div {
 .multTable {
   z-index          : 1;
   display          : none;
-  position         : absolute;
-  top              : 0;
-  width            : 100%;
-  /* max-width        : 550px; */
+  position         :relative;
+  top              : -7.7rem;
+  margin-left: auto;
+  margin-right: auto;
+  width        : 600px; 
   color            : hsla(0, 0%, 0%, 0.7);
   border-radius    : 0.2rem;
   background-color : hsl(43, 89%, 84%);
   align-items      : center;
-  grid-gap         : 8px;
   grid-template    : 1.3fr repeat(9, 1fr)/ 1.3fr repeat(9, 1fr);
 }
 
 .multTable span {
   display       : block;
-  min-width     : 31px;
-  min-height    : 31px;
-  border-right  : 5px hsl(42, 30%, 73%) dashed;
-  border-bottom : 5px hsl(42, 30%, 73%) dashed;
-  font-size     : 0.5rem;
+  border-right  : 1px hsl(42, 30%, 73%) dashed;
+  border-bottom : 1px hsl(42, 30%, 73%) dashed;
+  font-size     : 0.7rem;
+  text-align:center;
 }
 
 #n00 {
-  margin-top   : 10px;
-  margin-left  : 10px;
-  padding-top  : 10px;
-  padding-left : 10px;
+  border: 1px black solid;
   font-weight  : bold;
 }
 
-#n00:active,
-#n00:hover {
-  color               : hsl(0, 100%, 50%);
-  border-style        : double;
-  transition-property : all;
-  transition-duration : 0.6s;
-}
+    #n00:active,
+    #n00:hover {
+        color: hsl(0, 100%, 50%);
+        border-color: hsl(0, 100%, 50%);
+        border-style: double;
+        transition-property: all;
+        transition-duration: 0.6s;
+    }
 
 .errors {
   margin-left : 0.5rem;
