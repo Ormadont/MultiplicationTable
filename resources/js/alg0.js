@@ -290,17 +290,39 @@ const viewMult = {
         }
     },
 
-    //разукрасить ячейку Таблицы Пифагора случайным цветом
+    //отметить ячейку Таблицы Пифагора случайным цветом
     enhEl(el) {
         this.deEnh();
+
+        //id = "n" + "rowNum" + "colNum"
+        const rowNum = parseInt(el.id.substr(1,1),10);
+        const colNum = parseInt(el.id.substr(2,1),10);
+        const rowHeader = document.getElementById(`n${rowNum}0`);
+        const colHeader = document.getElementById(`n0${colNum}`);
+
+        enhEl(el);
+        enhEl(rowHeader);
+        enhEl(colHeader);
+
         const rndColor = `hsl(${Math.floor(Math.random() * 360)} , 100%, 85%)`;
         const rndBackColor = `hsla(${Math.floor(Math.random() * 360)} , 30%, 30%, 0.8)`;
         const rndBorderColor = `hsla(${Math.floor(Math.random() * 360)} , 100%, 75%, 0.8)`;
-        el.style.color = rndColor;
-        el.style.backgroundColor = rndBackColor;
-        el.style.borderColor = rndBorderColor;
-        el.style.transform = "scale(1.4)";
-        el.style.borderRadius = "50%";
+
+        // красим столбец
+        for (let i = 0; i < 10; i++) {
+          const el = document.getElementById(`n${i}${colNum}`);
+          el.style.color = rndColor;
+          el.style.backgroundColor = rndBackColor;
+          el.style.borderColor = rndBorderColor;
+        }
+
+        // красим строку
+        for (let i = 0; i < 10; i++) {
+          const el = document.getElementById(`n${rowNum}${i}`);
+          el.style.color = rndColor;
+          el.style.backgroundColor = rndBackColor;
+          el.style.borderColor = rndBorderColor;
+        }
 
     },
 
@@ -314,13 +336,13 @@ const viewMult = {
                 idName = `n${i}`;
             }
             const el = document.getElementById(idName)
-            if (el.style.color != "") {
-                el.style.color = "";
-                el.style.backgroundColor = "";
-                el.style.borderColor = "";
-                el.style.transform = "";
-                el.style.borderRadius = "";
-            }
+            el.style.color = "";
+            el.style.backgroundColor = "";
+            el.style.borderColor = "";
+            el.style.transform = "";
+            el.style.borderRadius = "";
+            el.style.borderStyle = "";
+
         }
     },
 };
@@ -370,6 +392,11 @@ const controlMult = {
         }
     },
 };
+
+function enhEl(el) {
+  el.style.transform = "scale(1.4)";
+  el.style.borderRadius = "30%";
+}
 
 document.onreadystatechange = () => {
     if (document.readyState === 'complete') {
