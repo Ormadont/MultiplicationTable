@@ -166,7 +166,7 @@ const viewMult = {
     //Количество ошибок совершённых пользователем
     errorsCount_span: document.getElementById('errorsCount'),
     // //Таблица умножения (Пифагора)
-     multTable_div: document.querySelector('.multTable'),
+    multTable_div: document.querySelector('.multTable'),
     //Первый множитель
     rankCount_span: document.getElementById('rankCount'),
     // меню выбора множителей
@@ -204,7 +204,7 @@ const viewMult = {
         for (let i = 0; i < size; i++) {
             a[i] = new Array(size);
             for (let j = 0; j < size; j++) {
-              num = i.toString() + j.toString();
+                num = i.toString() + j.toString();
                 if (i === 0 || j === 0) {
                     a[i][j] = `<span class="header r${i} c${j}" id="n${num}">${(i + 1) * (j + 1) - 1}</span>`
                 } else {
@@ -289,6 +289,40 @@ const viewMult = {
             viewMult.multTable_div.style.display = "grid"
         }
     },
+
+    //разукрасить ячейку Таблицы Пифагора случайным цветом
+    enhEl(el) {
+        this.deEnh();
+        const rndColor = `hsl(${Math.floor(Math.random() * 360)} , 100%, 85%)`;
+        const rndBackColor = `hsla(${Math.floor(Math.random() * 360)} , 30%, 30%, 0.8)`;
+        const rndBorderColor = `hsla(${Math.floor(Math.random() * 360)} , 100%, 75%, 0.8)`;
+        el.style.color = rndColor;
+        el.style.backgroundColor = rndBackColor;
+        el.style.borderColor = rndBorderColor;
+        el.style.transform = "scale(1.4)";
+        el.style.borderRadius = "50%";
+
+    },
+
+    // вернуть таблице Пифагора первоначальный вид
+    deEnh() {
+        let idName = ``;
+        for (var i = 0; i < 100; i++) {
+            if (i < 10) {
+                idName = `n0${i}`;
+            } else {
+                idName = `n${i}`;
+            }
+            const el = document.getElementById(idName)
+            if (el.style.color != "") {
+                el.style.color = "";
+                el.style.backgroundColor = "";
+                el.style.borderColor = "";
+                el.style.transform = "";
+                el.style.borderRadius = "";
+            }
+        }
+    },
 };
 
 const controlMult = {
@@ -326,6 +360,14 @@ const controlMult = {
         document.getElementById('n00').addEventListener('click',
             () => viewMult.TabelP());
 
+        //  обработчик события на каждую ячейку таблицы Пифагора
+        let idName = ``;
+        for (var i = 0; i < 100; i++) {
+            if (i < 10) idName = `n0${i}`
+            else idName = `n${i}`
+            document.getElementById(idName).addEventListener('mouseover',
+                (event) => viewMult.enhEl(event.target), false);
+        }
     },
 };
 
