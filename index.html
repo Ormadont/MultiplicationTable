@@ -1,71 +1,83 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Таблица умножения</title>
     <link rel="stylesheet" href="./resources/css/reset.css">
     <link rel="stylesheet" href="./resources/css/style.css">
     <link rel="shortcut icon" href="./resources/favicon.ico" type="image/x-icon">
     <link rel="icon" href="./resources/favicon.ico" type="image/x-icon">
-  </head>
-  <body>
+</head>
+<body>
 
-<!-- header -->
-    <header class="center">
-      <div class="rank">
-        <span>Умножение на </span>
-        <span id="rankCount" class="choice">3</span>
-        <div class="ranks">
-          <!-- <span id="rankCount1" class="choice">1</span> -->
-          <span id="rankCount2" class="choice">2</span>
-          <span id="rankCount3" class="choice">3</span>
-          <span id="rankCount4" class="choice">4</span>
-          <span id="rankCount5" class="choice">5</span>
-          <span id="rankCount6" class="choice">6</span>
-          <span id="rankCount7" class="choice">7</span>
-          <span id="rankCount8" class="choice">8</span>
-          <span id="rankCount9" class="choice">9</span>
+    <!--Таблица Пифагора-->
+    <div class="flexCenter">
+        <div class="multTable">
+
         </div>
-      </div>
-    </header>
-
-<!-- board -->
-    <div class="board">
-      <span id="question">3 * 5</span><span id="equal"> = </span>
-      <div class="answers">
-        <span id="answer1" class="choice center">?</span>
-        <span id="answer2" class="choice center">?</span>
-        <span id="answer3" class="choice center">?</span>
-        <span id="answer4" class="choice center">?</span>
-        <span id="answer5" class="choice center">?</span>
-        <span id="answer6" class="choice center">?</span>
-      </div>
     </div>
 
+    <!-- header -->
+    <header class="center">
+        <div class="rank">
+            <span>Умножение на </span>
+            <span id="rankCount" class="choice">3</span>
+            <div class="ranks">
+                <!-- <span id="rankCount1" class="choice">1</span> -->
+                <span id="rankCount2" class="choice">2</span>
+                <span id="rankCount3" class="choice">3</span>
+                <span id="rankCount4" class="choice">4</span>
+                <span id="rankCount5" class="choice">5</span>
+                <span id="rankCount6" class="choice">6</span>
+                <span id="rankCount7" class="choice">7</span>
+                <span id="rankCount8" class="choice">8</span>
+                <span id="rankCount9" class="choice">9</span>
+            </div>
+        </div>
+    </header>
 
-<!-- footer -->
-    <footer id="center" class="center" >
-      <div class="efforts">
-        <span>Попыток: </span>
-        <span id="effortsCount">0</span>
-      </div>
-      <span id="multTableQ">?</span>
-      <div class="multTable">
+    <!-- board -->
+    <div class="board">
+        <!-- <span id="multiplier1"></span>
+        <span id="signOfOperation"></span>
+        <span id="multiplier2"></span> -->
+        <span id="question"></span>
+        <span id="equal"> = </span>
+        <div class="answers">
+            <span id="answer1" class="choice center">?</span>
+            <span id="answer2" class="choice center">?</span>
+            <span id="answer3" class="choice center">?</span>
+            <span id="answer4" class="choice center">?</span>
+            <span id="answer5" class="choice center">?</span>
+            <span id="answer6" class="choice center">?</span>
+            <span id="signOfQuestion" class="choice center">?</span>
+            <span id="userAnswer" class="choice center"></span>
+        </div>
+    </div>
 
-      </div>
-      <div class="errors">
-        <span>Ошибок: </span>
-        <span id="errorsCount">0</span>
-      </div>
+    <!-- footer -->
+    <footer id="center" class="center">
+        <div class="residue">
+            <span>Осталось: </span>
+            <span id="residueCount">0</span>
+        </div>
+        <span id="multTableQ">?</span>
+
+
+        <div class="errors">
+            <span>Ошибок: </span>
+            <span id="errorsCount">0</span>
+        </div>
 
     </footer>
 
-<!-- journal -->
+    <!-- journal -->
     <div class="journal ">
-      <h3 >Верные ответы</h3>
-      <div class="goodAnswers">
-      </div>
+        <h3>Верные ответы</h3>
+        <div class="goodAnswers">
+        </div>
     </div>
-    <script src="./resources/js/alg.js"></script>
-  </body>
+
+    <script src="./resources/js/alg0.js"></script>
+</body>
 </html>
