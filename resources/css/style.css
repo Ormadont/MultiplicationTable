@@ -148,14 +148,20 @@ footer {
 }
 
 .flexCenter {
-    display: flex;
+    display: none;
     justify-content: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: hsla(0, 0%, 21%, 0.76);
 }
 
 .multTable {
     margin-top: 0.3rem;
     position: absolute;
-    z-index: 1;
+    z-index: 10;
     display: none;
     width: auto;
     height: auto;
@@ -181,20 +187,20 @@ footer {
     }
 
 span.header {
-    border-color: hsl(43, 89%, 84%);
+    border-color: hsla(42, 90%, 84%, 0.4);
     border-style: outset;
+    color: hsla(49, 100%, 86%, 0.86);
 }
 
-#n00 {
+/* #n00 {
     border: 1px black solid;
     font-weight: bold;
-}
+} */
 
     #n00:active,
     #n00:hover {
         color: hsl(0, 100%, 50%);
         border-color: hsl(0, 100%, 50%);
-        border-style: double;
     }
 
 .errors {

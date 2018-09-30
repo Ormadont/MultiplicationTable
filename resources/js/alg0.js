@@ -194,12 +194,14 @@ const viewMult = {
         this.hideUserAnswer();
         this.showSignOfQuestion();
         this.updateResidue();
+
         //обнулить число ошибок
         this.errorsCount_span.innerHTML = 0;
         //показать первый основной множитель
         this.rankCount_span.innerHTML = modelMult.curQ[0];
         //отрисовка таблицы Пифагора
         this.multTable_div.style.display = "none";
+        document.getElementById("outerPT").style.display = "none";
         if (this.multTable_div.childElementCount == 0) {
             this.multTable_div.innerHTML = this.createArrayForMTable();
         };
@@ -296,7 +298,7 @@ const viewMult = {
         this.answers_span.forEach(el => el.style.display = "none");
         this.showSignOfQuestion();
     },
-    //показать знак равенства или неравенства - истина, ложь
+    //показать знак равенства или  - истина, ложь
     showSignOfEqual() {
         const el = document.getElementById('equal');
         if (modelMult.userRight) {
@@ -311,9 +313,11 @@ const viewMult = {
     // показать/скрыть таблицу Пифагора
     TabelP() {
         if (viewMult.multTable_div.style.display == "grid") {
-            viewMult.multTable_div.style.display = "none"
+            viewMult.multTable_div.style.display = "none";
+            document.getElementById("outerPT").style.display = "none";
         } else {
-            viewMult.multTable_div.style.display = "grid"
+            viewMult.multTable_div.style.display = "grid";
+            document.getElementById("outerPT").style.display = "flex";
         }
     },
 
@@ -444,12 +448,26 @@ const controlMult = {
             document.getElementById(idName).addEventListener('mouseover',
                 (event) => viewMult.enhEl(event.target), false);
         }
+
+        // скрыть Таблицу Пифагора
+        document.getElementById("outerPT").addEventListener('click', (event) => {
+          if (event.target.id == "outerPT") {
+            viewMult.TabelP();
+          }
+        })
     },
 };
 
 function enhEl(el) {
-  el.style.transform = "scale(1.4)";
-  el.style.borderRadius = "50%";
+
+  if (el.id == "n00") {
+      el.style.transform = "scale(2)";
+      el.style.zIndex = "1";
+      el.style.borderRadius = "25%";
+  } else {
+    el.style.transform = "scale(1.4)";
+    el.style.borderRadius = "50%";
+  }
 }
 
 document.onreadystatechange = () => {
