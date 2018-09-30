@@ -46,11 +46,11 @@ const modelMult = {
 
     // setRank
     setRank(newRank) {
-        modelMult.init();
         viewMult.hideRanks();
         viewMult.rankCount_span.innerHTML = newRank;
         this.curQ[0] = newRank;
         //сброс состояний
+        modelMult.init();
         viewMult.init();
     },
     //сформировать 6 вариантов ответа
