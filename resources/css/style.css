@@ -8,13 +8,13 @@
 
 @media only screen and (max-height: 600px) {
   html {
-      font-size: 40px;
+      font-size: 37px;
   }
 }
 
 @media only screen and (max-height: 400px) {
   html {
-      font-size: 33px;
+      font-size: 31px;
   }
 }
 
