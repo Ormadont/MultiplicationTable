@@ -4,9 +4,21 @@ html {
     font-size: 60px;
 }
 
-@media only screen and (min-width: 600px) and (orientation: landscape) {
+@media only screen and (max-height: 600px) {
   html {
       font-size: 40px;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  html {
+      font-size: 33px;
+  }
+}
+
+@media only screen and (min-height: 601px) {
+  html {
+      font-size: 65px;
   }
 }
 
