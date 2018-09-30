@@ -4,6 +4,13 @@ html {
     font-size: 60px;
 }
 
+@media only screen and (min-width: 600px) and (orientation: landscape) {
+  html {
+      font-size: 40px;
+  }
+}
+
+
 body {
     color: hsla(292, 25%, 24%, 0.9);
     background-color: hsl(43, 89%, 84%);
@@ -83,7 +90,7 @@ header {
 
 .board {
     display: flex;
-    height: 294px;
+    height: 4.9rem;
     margin-top: 0.5rem;
     align-items: center;
     justify-content: center;
@@ -91,7 +98,7 @@ header {
 
 .answers {
     display: flex;
-    height: 294px;
+    height: 4.9rem;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
@@ -155,7 +162,7 @@ footer {
     .multTable span {
         display: block;
         font-size: 0.6rem;
-        padding: 0.15rem;
+        padding: 0.12rem;
         text-align: center;
         color: hsla(43, 66%, 88%, 0.85);
         background-color: hsla(292, 25%, 24%, 0.9);
@@ -204,12 +211,11 @@ h3 {
 
 #multTableQ {
     display: inline-block;
-    width: 60px;
-    height: 60px;
+    width: 1rem;
+    height: 1rem;
     border: hsl(43, 89%, 84%) 2px solid;
     border-radius: 50%;
     transition: 0.6s;
-    border-style:
 }
 
     #multTableQ:hover {

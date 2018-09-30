@@ -409,8 +409,6 @@ const controlMult = {
         modelMult.init();
         viewMult.init();
         this.addEvents();
-        //показать таблицу Пифагора
-        viewMult.TabelP();
     },
 
     //установить действия по событиям
