@@ -133,19 +133,17 @@ footer {
     margin-right: 0.5rem;
 }
 
-/* ������� �������� */
-
 .flexCenter {
     display: flex;
     justify-content: center;
 }
 
 .multTable {
-    margin-top: 0.2rem;
+    margin-top: 0.3rem;
     position: absolute;
     z-index: 1;
     display: none;
-    width: 7.1rem;
+    width: auto;
     height: auto;
     color: hsla(59, 100%, 50%, 1);
     border-radius: 0.2rem;
@@ -156,95 +154,22 @@ footer {
 
     .multTable span {
         display: block;
-        font-size: 0.55rem;
+        font-size: 0.6rem;
+        padding: 0.15rem;
         text-align: center;
-        color: hsl(43, 89%, 84%);
+        color: hsla(43, 66%, 88%, 0.85);
         background-color: hsla(292, 25%, 24%, 0.9);
         border-color: grey;
         border-style: groove;
         border-width: thick;
-        color: hsla(170, 29%, 92%, 0.96);
-        transition-property: all;
-        transition-duration: 0.6s;
+        /* transition-property: color;
+        transition-duration: 1.5s; */
     }
 
 span.header {
     border-color: hsl(43, 89%, 84%);
     border-style: outset;
 }
-
-span.r1 {
-    background-color: hsla(0, 32%, 30%, 0.9);
-}
-
-span.r2 {
-    background-color: hsla(40, 32%, 30%, 0.9);
-}
-
-span.r3 {
-    background-color: hsla(80, 32%, 30%, 0.9);
-}
-
-span.r4 {
-    background-color: hsla(120, 32%, 30%, 0.9);
-}
-
-span.r5 {
-    background-color: hsla(160, 32%, 30%, 0.9);
-}
-
-span.r6 {
-    background-color: hsla(200, 32%, 30%, 0.9);
-}
-
-span.r7 {
-    background-color: hsla(286, 32%, 30%, 0.9);
-}
-
-span.r8 {
-    background-color: hsla(280, 32%, 30%, 0.9);
-}
-
-span.r9 {
-    background-color: hsla(320, 32%, 30%, 0.9);
-}
-
-span.c1 {
-    border-color: hsla(0, 44%, 47%, 0.72);
-}
-
-span.c2 {
-    border-color: hsla(40, 44%, 47%, 0.72);
-}
-
-span.c3 {
-    border-color: hsla(80, 44%, 47%, 0.72);
-}
-
-span.c4 {
-    border-color: hsla(120, 44%, 47%, 0.72);
-}
-
-span.c5 {
-    border-color: hsla(160, 44%, 47%, 0.72);
-}
-
-span.c6 {
-    border-color: hsla(200, 44%, 47%, 0.72);
-}
-
-span.c7 {
-    border-color: hsla(240, 44%, 47%, 0.72);
-}
-
-span.c8 {
-    border-color: hsla(280, 44%, 47%, 0.72);
-}
-
-span.c9 {
-    border-color: hsla(320, 44%, 47%, 0.72);
-}
-
 
 #n00 {
     border: 1px black solid;

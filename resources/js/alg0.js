@@ -6,7 +6,7 @@
 const modelMult = {
     //Список вопросов - перечень вторых множителей
     listQ: [],
-    //Текущий вопрос - основной первый и второй множители
+    //Текущий вопрос - основной (первый) и второй множители
     curQ: [0, 0],
     //верный ответ
     rightA: 0,
@@ -171,8 +171,18 @@ const viewMult = {
     rankCount_span: document.getElementById('rankCount'),
     // меню выбора множителей
     ranks_div: document.querySelector('.ranks'),
-    // // Контейнер элементов для выбора первого множителя. По умолчанию скрыт
-    // ranks_div: document.querySelector('.ranks'),
+
+    // массивы цветов ячеек, пример `hsla(${color}, 100%, 32%, 0.94)`
+    colorsForTP: {
+
+      paleColor: [] ,
+      paleBackGround: [], //бледный задний фон
+      paleBorder: [], //бледный бордюр
+
+      brightColor: [],
+      brightBackGround: [], //яркий задний фон
+      brightBorder: [], //яркий бордюр
+    },
 
     //начальное представление
     init() {
@@ -192,8 +202,25 @@ const viewMult = {
         this.multTable_div.style.display = "none";
         if (this.multTable_div.childElementCount == 0) {
             this.multTable_div.innerHTML = this.createArrayForMTable();
+        };
+        //разрисовать таблицу Пифагора
+        this.fillColorsForCellsTP();
+        this.decorateTP();
+
+    },
+
+    // разрисовать таблицу Пифагора
+    decorateTP() {
+      const numLines = 9;
+      for (let i = 0; i < numLines; i++) {
+        for (var j = 0; j < numLines; j++) {
+          const el = document.getElementById(`n${i+1}${j+1}`);
+          el.style.color = this.colorsForTP.paleColor[j];
+          el.style.backgroundColor = this.colorsForTP.paleBackGround[i];
+          el.style.borderColor = this.colorsForTP.paleBorder[i];
         }
 
+      }
     },
 
     //создание набора тэгов таблицы Пифагора
@@ -290,13 +317,19 @@ const viewMult = {
         }
     },
 
-    //отметить ячейку Таблицы Пифагора случайным цветом
+    //отметить ячейку Таблицы Пифагора цветом
     enhEl(el) {
         this.deEnh();
 
         //id = "n" + "rowNum" + "colNum"
-        const rowNum = parseInt(el.id.substr(1,1),10);
-        const colNum = parseInt(el.id.substr(2,1),10);
+        let rowNum = parseInt(el.id.substr(1,1),10);
+        let colNum = parseInt(el.id.substr(2,1),10);
+        if (colNum == 0) {
+          colNum = 1;
+        }
+        if (rowNum == 0) {
+          rowNum = 1
+        }
         const rowHeader = document.getElementById(`n${rowNum}0`);
         const colHeader = document.getElementById(`n0${colNum}`);
 
@@ -304,46 +337,69 @@ const viewMult = {
         enhEl(rowHeader);
         enhEl(colHeader);
 
-        const rndColor = `hsl(${Math.floor(Math.random() * 360)} , 100%, 85%)`;
-        const rndBackColor = `hsla(${Math.floor(Math.random() * 360)} , 30%, 30%, 0.8)`;
-        const rndBorderColor = `hsla(${Math.floor(Math.random() * 360)} , 100%, 75%, 0.8)`;
-
         // красим столбец
         for (let i = 0; i < 10; i++) {
-          const el = document.getElementById(`n${i}${colNum}`);
-          el.style.color = rndColor;
-          el.style.backgroundColor = rndBackColor;
-          el.style.borderColor = rndBorderColor;
+          const el = document.getElementById(`n${i+1}${colNum}`);
+          if (i<9) {
+            el.style.color = this.colorsForTP.brightColor[colNum-1];
+            el.style.backgroundColor = this.colorsForTP.brightBackGround[i];
+            el.style.borderColor = this.colorsForTP.brightBorder[i];
+          }
         }
 
         // красим строку
-        for (let i = 0; i < 10; i++) {
+        for (let i = 1; i < 10; i++) {
           const el = document.getElementById(`n${rowNum}${i}`);
-          el.style.color = rndColor;
-          el.style.backgroundColor = rndBackColor;
-          el.style.borderColor = rndBorderColor;
+          el.style.color = this.colorsForTP.brightColor[i-1];
+          el.style.backgroundColor = this.colorsForTP.brightBackGround[rowNum-1];
+          el.style.borderColor = this.colorsForTP.brightBorder[rowNum-1];;
         }
 
     },
 
     // вернуть таблице Пифагора первоначальный вид
     deEnh() {
+      // FIXME: исключить обработку ненужных ячеек внутри таблицы!
         let idName = ``;
-        for (var i = 0; i < 100; i++) {
+        for (let i = 0; i < 100; i++) {
             if (i < 10) {
                 idName = `n0${i}`;
             } else {
                 idName = `n${i}`;
             }
             const el = document.getElementById(idName)
-            el.style.color = "";
             el.style.backgroundColor = "";
             el.style.borderColor = "";
             el.style.transform = "";
             el.style.borderRadius = "";
             el.style.borderStyle = "";
-
         }
+        this.decorateTP();
+    },
+
+    // подготовить цвета для разукрашивания таблицы Пифагора
+    fillColorsForCellsTP() {
+      let color = 0;
+      const numLines = 9;
+      const colorDiff = 360/(numLines+1);
+      for (let i = 0; i < numLines; i++) {
+
+        this.colorsForTP.paleColor.push(
+          `hsla(${color}, 21%, 58%, 0.74)`);
+        this.colorsForTP.paleBackGround.push(
+          `hsla(${color}, 22%, 20%, 0.9)`);
+        this.colorsForTP.paleBorder.push(
+          `hsla(${color}, 32%, 47%, 0.72)`);
+
+        this.colorsForTP.brightColor.push(
+          `hsla(${color}, 100%, 82%, 0.95)`);
+        this.colorsForTP.brightBackGround.push(
+          `hsla(${color}, 30%, 20%, 0.8)`);
+        this.colorsForTP.brightBorder.push(
+          `hsla(${color}, 50%, 40%, 0.8)`);
+
+        color += colorDiff;
+      }
     },
 };
 
@@ -395,7 +451,7 @@ const controlMult = {
 
 function enhEl(el) {
   el.style.transform = "scale(1.4)";
-  el.style.borderRadius = "30%";
+  el.style.borderRadius = "50%";
 }
 
 document.onreadystatechange = () => {
