@@ -1,7 +1,9 @@
 /* universal */
 
-html {
-    font-size: 60px;
+@media only screen and (min-height: 601px) {
+  html {
+      font-size: 65px;
+  }
 }
 
 @media only screen and (max-height: 600px) {
@@ -15,13 +17,6 @@ html {
       font-size: 33px;
   }
 }
-
-@media only screen and (min-height: 601px) {
-  html {
-      font-size: 65px;
-  }
-}
-
 
 body {
     color: hsla(292, 25%, 24%, 0.9);
