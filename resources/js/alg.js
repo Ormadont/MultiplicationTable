@@ -20,6 +20,8 @@ const modelMult = {
     numUserA: 0,
     //результат проверки ответа пользователя
     userRight: true,
+    //только что выбран множитель, следующий вопрос не выбран
+    newRank: false,
     //инициализация !!! Установить исходное состояние
     init() {
         //получить массив вопросов - 10 целых чисел
@@ -46,6 +48,7 @@ const modelMult = {
 
     // setRank
     setRank(newRank) {
+        this.newRank = true;
         viewMult.hideRanks();
         viewMult.rankCount_span.innerHTML = newRank;
         this.curQ[0] = newRank;
@@ -77,7 +80,7 @@ const modelMult = {
         viewMult.showSignOfEqual();
         setTimeout(() => {
             //следующий вопрос
-            this.nextQuestion();
+            if (!this.newRank) this.nextQuestion(); //если только что не был выбран новый
             //показать количество непоказанных вопросов
             viewMult.updateResidue();
         }, 2000);
@@ -275,6 +278,7 @@ const viewMult = {
     },
     //показать варианты ответа
     showAnswers() {
+        modelMult.newRank = false;
         for (let i = 0; i < modelMult.rndA.length; i++) {
             this.answers_span[i].innerHTML = modelMult.rndA[i];
             this.answers_span[i].style.display = "inline-block";
