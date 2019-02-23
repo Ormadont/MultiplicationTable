@@ -1,5 +1,10 @@
 /* universal */
 
+@font-face {
+    font-family: "Theano ModernC";
+    src: url("../fonts/13356.ttf");
+  }
+
 @media only screen and (min-height: 601px) {
   html {
       font-size: 65px;
@@ -21,6 +26,7 @@
 body {
     color: hsla(292, 25%, 24%, 0.9);
     background-color: hsl(43, 89%, 84%);
+    font-family: 'Theano ModernC';
 }
 
 .center {
@@ -33,14 +39,16 @@ header {
 }
 
 .choice {
-    width: 1rem;
-    padding: 0.1rem;
+    height: 1.2rem;
+    line-height: 1.4rem;
+    width: 1.2rem;
+    padding: 0.2rem;
     color: hsl(43, 89%, 84%);
     border-color: hsla(292, 25%, 24%, 0.5);
     border-width: 1px;
     border-style: dotted;
     border-style:outset;
-    border-radius: 0.5rem;
+    border-radius: 50%;
     background-color: hsla(292, 25%, 24%, 0.9);
     transition-property: all;
     transition-duration: 0.4s;
@@ -226,6 +234,7 @@ h3 {
     display: inline-block;
     width: 1rem;
     height: 1rem;
+    line-height: 1.15rem;
     border: hsl(43, 89%, 84%) 2px solid;
     border-radius: 50%;
     transition: 0.6s;
