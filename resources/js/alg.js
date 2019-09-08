@@ -59,7 +59,8 @@ const modelMult = {
     //сформировать 6 вариантов ответа
     computeRndA() {
         this.rndA = getRndArray(this.numRndErrorAnswers, this.rightA / this.curQ[0]).map(x => x * this.curQ[0]);
-        mixUp(this.rndA.push(this.rightA));
+        this.rndA.push(this.rightA);
+        this.rndA = mixUp(this.rndA);
     },
     //Получить и проверить ответ пользователя
     treatAnswer(el) {
@@ -139,8 +140,8 @@ function getRndArray(lengthArray, wastEl = -1) {
 function mixUp(origArray) {
     const mixUpArray = [];
     while (origArray.length > 0) {
-        const randomIndex = Math.floor(Math.random() * array.length); //рандомный индекс первого массива
-        const rand_element = array.splice(randomIndex, 1) //удалённый элемент (массив) первого массива для второго массива
+        const randomIndex = Math.floor(Math.random() * origArray.length); //рандомный индекс первого массива
+        const rand_element = origArray.splice(randomIndex, 1) //удалённый элемент (массив) первого массива для второго массива
         mixUpArray.push(rand_element[0]); //добавляем элемент в новый массив
     }
     return mixUpArray;
